@@ -5,12 +5,20 @@
 
 ## Unreleased
 ### Prepared
-- [CSS视差背景实现]
-- 寻找类似的真实翻页效果插件及教程，如[turn.js]
-- 学习HTML5的Web组件化中的[Shadow DOM]及[Template]
-- 准备不同设备下的背景图片
+    - [CSS视差背景实现]
+    - 寻找类似的真实翻页效果插件及教程，如[turn.js]
+    - 学习HTML5的Web组件化中的[Shadow DOM]
 
-[Shadow DOM]: http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
+## 0.0.1 - 2016-10-01
+### Added
+    - 准备不同设备下的背景图片
+    - 使用desktop和mobile的template并注入
+    - 完成desktop下的一级DOM数
+
+### Ready
+    - 学习HTML5的Web组件化中的[Template]
+
+[Shadow DOM]:http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
 [Template]: http://www.html5rocks.com/en/tutorials/webcomponents/template/
 [CSS视差背景实现]: http://www.shejidaren.com/css-fixed-scroll-background.html
 [turn.js]: http://www.turnjs.com/
