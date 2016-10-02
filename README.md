@@ -40,7 +40,7 @@
 - [CSS视差背景实现]
 
 [0.0.2]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.2
-[0.0.3]： https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.3
+[0.0.3]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.3
 
 [Shadow DOM]: http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
 [Template]: http://www.html5rocks.com/en/tutorials/webcomponents/template/
