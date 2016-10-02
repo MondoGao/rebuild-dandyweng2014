@@ -5,15 +5,218 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge, chrome=1">
     <title>翁天信 · Dandy Weng</title>
-    <script src="src/common/js/index.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="dep/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
     <template id="desktop">
+        <template id="section-angle">
+            <a href="#" class="angle">
+                <i class="fa fa-angle-down"></i>
+            </a>
+        </template>
         <section id="intro">
-
+            <ul>
+                <li><a id="btn-lang" href="javascript:;">View in English <i class="fa fa-language"></i></a></li>
+                <li><a id="btn-fullscreen" href="javascript:;">全屏模式 <i class="fa fa-expand"></i></a></li>
+            </ul>
+            <div id="enter-fullscreen" class="notification clickable"><p>点击此处<span>或按下 F11 键</span>进入全屏模式，显示效果更佳<i class="fa fa-times"></i></p></div>
+            <div class="content container">
+                <div class="uselessdiv">
+                    <!-- 此处架构与源网页较大不同，后期调试再进行修改 -->
+                    <div id="portait" class="layer">
+                        <!-- 外层位移确定起始位置 -->
+                        <div class="offset-outer">
+                            <!-- 内层位移保证视觉上图片不变 -->
+                            <div class="offset-inner">
+                                <div class="sticker-img sticker-front">
+                                    <!-- 应动态添加shadowR/L/T/B类 -->
+                                    <div class="sticker-shadow"></div>
+                                </div>
+                                <div class="sticker-img sticker-back">
+                                    <div class="sticker-shadow"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- data-depth于重力视差相关联 -->
+                    <h2 class="layer" data-depth="1.00">我是翁天信</h2>
+                    <p class="layer" data-depth="0.80">
+                        <!-- 这有个彩蛋 -->
+                        一个 19 岁的 homeschooler<br />
+                        这个世界就是我的学校<br />
+                        我有<e>自由的身心</e>，一直在前行。</p>
+                </div>
+            </div>
+            <a href="http://www.camarts.cn/archives/2375.html" target="_blank" rel="external" class="photo-title">《里格岛掠影》</a>
         </section>
         <section id="homeschool">
-
+            <div class="content">
+                <!-- 去除了header嵌套 -->
+                <h2>
+                    我远离校园
+                    <br />
+                    只为探寻这个世界
+                </h2>
+                <p>在两年幼儿园和两星期小学之后，我便退学，开始 homeschooling。从此，应试教育和学校里面所发生的一切，都与我无关。自己学，做自己。</p>
+                <p>我更在乎学习的过程，而不是结果。所以我的学习过程是充实的，也一定会和我的生命一样长久。</p>
+            </div>
+            <!-- 应动态添加animated类 -->
+            <div id="life-events" class="timeline">
+                <!-- Timeline - 1995 -->
+                <div class="timeline-row">
+                    <div class="timeline-time">
+                        <!-- small时间悬浮出现 -->
+                        <small>1995</small>
+                        出生
+                    </div>
+                    <div class="timeline-icon">
+                        <!-- 去除div.bg-primary嵌套 -->
+                        <i class="fa fa-child"></i>
+                    </div>
+                    <!-- 去除.panel -->
+                    <div class="timeline-content">
+                        <!-- 去除div.panel-body -->
+                        <h3>我出生了</h3>
+                        <!-- 通过::after添加横线 -->
+                    </div>
+                </div>
+                <!-- Timeline - 2005 -->
+                <div class="timeline-row">
+                    <div class="timeline-time">
+                        <small>2005</small>
+                        10 岁
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fa fa-book"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>逐渐掌握自学的方法</h3>
+                    </div>
+                </div>
+                <!-- Timeline - 2006 -->
+                <div class="timeline-row">
+                    <div class="timeline-time">
+                        <small>2006</small>
+                        11 岁
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fa fa-image"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>开始自学平面设计</h3>
+                    </div>
+                </div>
+                <!-- Timeline - 2007 -->
+                <div class="timeline-row">
+                    <div class="timeline-time">
+                        <small>2007</small>
+                        12 岁
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fa fa-code"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>开始自学编程</h3>
+                    </div>
+                </div>
+                <!-- Timeline - 2008 -->
+                <div class="timeline-row">
+                    <div class="timeline-time">
+                        <small>2008</small>
+                        13 岁
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fa fa-camera"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>开始接触摄影</h3>
+                    </div>
+                </div>
+                <!-- Timeline - 2009 -->
+                <div class="timeline-row">
+                    <div class="timeline-time">
+                        <small>2009</small>
+                        14 岁
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fa fa-desktop"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>自学 Web 设计与开发</h3>
+                    </div>
+                </div>
+                <!-- Timeline - 2010 -->
+                <div class="timeline-row">
+                    <div class="timeline-time">
+                        <small>2010</small>
+                        15 岁
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fa fa-globe"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>踏上走遍中国的旅途</h3>
+                    </div>
+                </div>
+                <!-- Timeline - 2011 -->
+                <div class="timeline-row">
+                    <div class="timeline-time">
+                        <small>2011</small>
+                        16 岁
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fa fa-book"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>开始串联自己的爱好</h3>
+                    </div>
+                </div>
+                <!-- Timeline - 2012 -->
+                <div class="timeline-row">
+                    <div class="timeline-time">
+                        <small>2012</small>
+                        17 岁
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fa fa-book"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>整合运用自己所学</h3>
+                    </div>
+                </div>
+                <!-- Timeline - 2013 -->
+                <div class="timeline-row">
+                    <div class="timeline-time">
+                        <small>2013</small>
+                        18 岁
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fa fa-male"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>以成年人的标准要求自己</h3>
+                    </div>
+                </div>
+                <!-- Timeline - 2014 -->
+                <div class="timeline-row">
+                    <div class="timeline-time">
+                        <small>2014</small>
+                        19 岁
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fa fa-road"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>兼陈中衡，虚一而静</h3>
+                    </div>
+                </div>
+                <!-- Timeline - ellipsis -->
+                <div class="timeline-row">
+                    <div class="timeline-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </div>
+                </div>
+            </div>
         </section>
         <section id="travel">
 
@@ -41,5 +244,6 @@
     <template id="mobile">
 
     </template>
+    <script src="src/common/js/index.js" charset="utf-8"></script>
 </body>
 </html>
