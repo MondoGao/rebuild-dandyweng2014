@@ -11,13 +11,18 @@ html, body, section, div, ul, li, h1, h2, h3, h4, h5, h6, p, figure, figcaption,
     border: 0;
     box-sizing: border-box;
 }
+*:before, *:after {
+    box-sizing: border-box;
+}
 html {
-    font-size: 50%;
-    font-family: "merriweather","宋体", sans-serif;
+    font-size: 62.5%;
+    font-family: "merriweather", SimSun, "宋体", sans-serif;
 }
 body {
     font-size: 2.2rem;
     color: rgba(0,0,0,0.75);
+    line-height: 1.65;
+    min-width: 800px;
 }
 section {
     position: relative;
@@ -33,7 +38,11 @@ h1, h2 {
     font-weight: normal;
     line-height: 1.3;
 }
+h1, h2, h3, h4 {
+    cursor: default;
+}
 a {
+    color: #475f85;
     text-decoration: none;
 }
 .notification {
@@ -74,7 +83,7 @@ a {
 
 #intro {
     height: 100vh;
-    padding: 40vh 0 0;
+    padding: 30vh 0 0;
     background: url(../img/intro.jpg) no-repeat fixed bottom center;
     background-size: cover;
     text-align: center;
@@ -94,9 +103,9 @@ a {
             }
         }
     }
-
     .content {
         margin: 0 auto 130px;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.2);
         #portait {
             margin: -130px auto 0;
             width: 100px;
@@ -156,13 +165,21 @@ a {
 	overflow: hidden;
     // filter: blur(10px);
     p {
-        margin-bottom: 5rem;
+        margin-bottom: 1.5rem;
     }
     .content {
         width: 50%;
         left: 50%;
-        padding-right: 5rem;
+        padding-right: 5em;
         text-shadow: 0 2px 3px rgba(0,0,0,0.3),0 1px 18px rgba(0,0,0,0.3);
+        @media (max-width: 1440px) {
+            width: 60%;
+            left: 40%
+        }
+        @media (max-width: 1024px) {
+            width: 90%;
+            left: 10%
+        }
         h2 {
             margin-bottom: 2rem;
         }
@@ -171,32 +188,54 @@ a {
         position: absolute;
         top: 0;
         left: 0;
-        width: 50%;
+        width: 40%;
         height: 100%;
-        padding-left: 25%;
-        &::after {
+        padding: 20px 0 20px 20%;
+        white-space: nowrap;
+        opacity: .5;
+        transition: opacity .5s;
+        @media (max-width: 1440px) {
+            left: 5%;
+            padding-left: 12%;
+            width: 55%;
+        }
+        @media (max-width: 1024px) {
+              display: none;
+        }
+        &:hover {
+            opacity: .9;
+        }
+        &::before {
             content: "";
             display: block;
         	position: absolute;
         	top: 0;
-        	left: 50%;
+        	// left: 50%;
         	width: 4px;
         	height: 100%;
         	background-color: rgba(0,0,0,0.2);
             border-radius: 2px;
         }
         .timeline-row {
-            margin-top: 1rem;
-            transform: translate(-57px, 0);
+            margin-bottom: 20px;
+            transform: translate(-69px, 0);
+            @media (min-height: 970px) {
+                margin-bottom: 25px;
+            }
             .timeline-time {
                 position: relative;
                 display: inline-block;
-                width: 40px;
+                width: 50px;
+                padding-right: 10px;
+                text-align: right;
+                text-shadow: 0 2px 3px rgba(0,0,0,0.3);
                 // margin-left: -47px;
                 small {
                     display: block;
                     font-size: 1.1rem;
-                    opacity: .7;
+                    opacity: 0;
+                    // opacity: .7;
+                    transition: opacity .5s;
                 }
                 font-size: 1.6rem;
             }
@@ -212,48 +251,56 @@ a {
                 line-height: 30px;
                 border-radius: 50%;
                 box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+                z-index: 1;
             }
             .timeline-content{
                 position: relative;
                 display: inline-block;
+                margin-left: 10px;
+                text-shadow: 0 2px 5px rgba(0,0,0,0.5),0px 5px 28px rgba(0,0,0,0.5);
+                padding-left: 40px;
+                opacity: 0;
+                transition: all .5s;
                 h3 {
                     font-size: 1.6rem;
                     font-weight: normal;
+                    white-space: normal;
                 }
                 &::after {
                 	content: "";
                 	position: absolute;
-                	top: 9px;
+                	top: 12px;
                 	left: 100%;
+                    margin-left: calc(-100% - 20px);
                 	width: 40px;
                 	height: 4px;
                 	background-color: rgba(0, 0, 0, 0.2);
                 	z-index: -1;
                 }
             }
-            &:last-child {
-                margin-left: 45px;
-            }
-
-            &:nth-child(2n+1) {
-                .timeline-time {
-                    left: 90px;
-                }
-                .timeline-content {
-                    right: 60px;
-                    transform: translate(-100%, 0);
-                }
-            }
-            &:nth-child(2n+2) {
-                .timeline-time {
-                    text-align: right;
-                    padding-right: 10px;
-                }
-                .timeline-content {
-                    padding-left: 20px;
-                    &::after {
-                        margin-left: calc(-100% - 20px);
+            @media (min-width: 1440px) {
+                &:nth-child(2n+1) {
+                    .timeline-time {
+                        text-align: left;
+                        left: 100px;
                     }
+                    .timeline-content {
+                        right: 80px;
+                        transform: translate(-100%, 0);
+                        &::after {
+                            transform: translateX(20px);
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }
+            &:hover {
+                small {
+                    opacity: .7;
+                }
+                .timeline-content {
+                    margin-left: 0;
+                    opacity: 1;
                 }
             }
         }
@@ -262,14 +309,28 @@ a {
 
 #travel {
     height: 100vh;
-    padding: 10vh 0 0 10%;
-    background: url(../img/stardust.png);
+    padding: 20vh 0 0 10%;
+    background: #464646 url(../img/stardust.png);
     background-size: 400px;
     color: #fff;
+    overflow-x: hidden;
+    transition: all .5s;
+    @media (max-width: 1550px) {
+        padding-left: 5%;
+    }
+    @media (max-width: 1024px) {
+        padding-left: 2%;
+    }
     .content {
         display: inline-block;
-        width: 45%;
+        width: 55%;
+        padding: 3.5em 2.5em 3.5em 2.5em;
         text-shadow: 0 2px 3px rgba(0,0,0,0.3);
+        transition: all .5s;
+        white-space: nowrap;
+        @media (max-width: 1440px) {
+            width: 48%;
+        }
         h2 {
             margin-bottom: 23px;
         }
@@ -279,12 +340,20 @@ a {
     }
     #map {
         display: inline-block;
-        width: 45%;
+        width: 35%;
+        vertical-align: top;
+        padding-top: 100px;
         svg {
-            transform: translateY(-0) scale(1);
+            transform: scale(1.8);
             overflow: visible;
+            transition: transform .5s;
             path, circle {
                 transition: all .5s;
+            }
+            circle {
+                transform: scale(0.625);
+                transform-origin: center;
+                transition: transform .5s;
             }
             g:first-child path:hover {
                 fill: #ccc;
@@ -293,6 +362,18 @@ a {
             g:last-child circle:hover {
                 fill: #fd3838;
                 fill-opacity: .8;
+            }
+            @media (max-width: 1280px) {
+                transform: scale(1.2);
+                circle {
+                    transform: scale(0.83);
+                }
+            }
+            @media (max-width: 1024px) {
+                transform: scale(0.9);
+                circle {
+                    transform: scale(1);
+                }
             }
         }
     }
@@ -310,6 +391,15 @@ a {
         opacity: .8;
         cursor: pointer;
     }
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 50px;
+        top: 0;
+        left: 0;
+        background: linear-gradient(to bottom,rgba(0,0,0,0.35) 0,rgba(60,60,60,0.1) 30%,rgba(0,0,0,0) 100%);
+    }
 }
 
 #photography {
@@ -323,14 +413,52 @@ a {
             margin: 1rem 0 30px;
         }
         #montage {
+            max-width: 1440px;
+            margin: 0 auto;
             height: 248px;
             overflow-y: hidden;
             a {
+                position: relative;
                 display: inline-block;
                 width: 180px;
+                height: 120px;
                 img {
                     width: 100%;
                     border-radius: 2px;
+                }
+                &::before, &::after {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    color: #fff;
+                    text-align: left;
+                    text-indent: -1em;
+                    opacity: 0;
+                    text-shadow: 0 2px 3px rgba(0,0,0,0.3),0 1px 18px rgba(0,0,0,0.3);
+                    transition: all .8s ease .05s;
+                }
+                &::before {
+                    content: attr(data-location);
+                    line-height: 11.5;
+                    font-size: 12px;
+                }
+                &::after {
+                    content: attr(data-camarts-title);
+                    line-height: 10;
+                    font-size: 18px;
+                    background: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(60,60,60,0.3) 60%,rgba(0,0,0,0.85) 100%);
+                }
+                &:hover {
+                    &::before {
+                        opacity: .8;
+                        text-indent: 1.6em;
+                    }
+                    &::after {
+                        opacity: 1;
+                        text-indent: 1em;
+                    }
                 }
             }
         }
@@ -576,13 +704,10 @@ a {
         p {
             margin: 1em;
         }
-        a {
-            color: #475f85;
-        }
         #comment {
             position: relative;
-            // width: 50%;
-            width: 75%;
+            width: 50%;
+            // width: 75%;
             margin: 65px auto 0;
             padding: 13px;
             padding-bottom: 0;
