@@ -8,6 +8,10 @@
 - 增加可以用css完成的动画效果
 - 增加关于桌面的响应式
 
+### [0.0.6] - 2016-10-06
+#### Added
+- 增加section 1,2,3,4的css过渡和大屏响应式
+
 ### [0.0.5] - 2016-10-05
 #### Added
 - 增加全部页面初步展现
@@ -59,6 +63,7 @@
 [0.0.3]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.3
 [0.0.4]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.4
 [0.0.5]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.5
+[0.0.6]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.6
 
 [Shadow DOM]: http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
 [Template]: http://www.html5rocks.com/en/tutorials/webcomponents/template/
