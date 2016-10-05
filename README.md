@@ -8,6 +8,13 @@
 - 增加可以用css完成的动画效果
 - 增加关于桌面的响应式
 
+### [0.0.5] - 2016-10-05
+### Added
+- 增加全部页面初步展现
+
+### Ready
+- SVG的viewbox和viewport
+
 ### [0.0.4] - 2016-10-04
 #### Added
 - 增加全部页面结构
@@ -50,6 +57,8 @@
 
 [0.0.2]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.2
 [0.0.3]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.3
+[0.0.4]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.4
+[0.0.5]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.5
 
 [Shadow DOM]: http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
 [Template]: http://www.html5rocks.com/en/tutorials/webcomponents/template/

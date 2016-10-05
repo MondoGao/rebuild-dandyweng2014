@@ -467,6 +467,9 @@
             <div id="lectures">
                 <div id="lectures-inner">
                     <article data-index="1" data-youku="XNjUyOTM0ODI0" data-youtube="F4BWNANyNhs" data-button="播放视频" class="video-available">
+                        <img src="src/desktop/img/tju-original.png" alt="同济大学演讲现场照片" />
+                        <img src="src/desktop/img/tju-blurred.png" />
+                        <i class="fa fa-play-circle"></i>
                         <header>
                             <hgroup>
                                 <h3>《为何不走寻常路》</h3>
@@ -474,12 +477,11 @@
                             </hgroup>
                             <p><time datetime="2013-12-5">2013 年 12 月</time> · 上海</p>
                         </header>
-                        <img src="src/desktop/img/tju-blurred.png" />
-                        <img src="src/desktop/img/tju-original.png" alt="同济大学演讲现场照片" />
                         <p>世界已经为我们准备了一切。大路和小路，都在我们脚下。我一直在探寻，没有犹豫，说走就走。作为一名 homeschooler，走过的、还要走的，注定都是不寻常的路。我要问问这个世界：不走寻常路，风景是否这边独好？</p>
-                    <i class="fa fa-play-circle"></i>
                     </article>
                     <article data-index="2" data-button="暂无视频" class="video-unavailable">
+                        <img src="src/desktop/img/jnu-original.png" alt="暨南大学演讲现场照片" />
+                        <img src="src/desktop/img/jnu-blurred.png" />
                         <header>
                             <hgroup>
                                 <h3>《过去 ＋ 现在 ＝ 将来》</h3>
@@ -487,11 +489,11 @@
                             </hgroup>
                             <p><time datetime="2014-4-12">2014 年 4 月</time> · 广州</p>
                         </header>
-                        <img src="src/desktop/img/jnu-blurred.png" />
-                        <img src="src/desktop/img/jnu-original.png" alt="暨南大学演讲现场照片" />
                         <p>将来似乎很遥远，但从某个角度看，将来却并不遥远。我将用我独特的学习形式、丰富的经历和体会来诠释这个同样新颖独特的等式：我有着怎样的过去？我现在在做什么？我的将来可能是什么样子？</p>
                     </article>
                     <article data-index="3" data-button="暂无视频" class="video-unavailable">
+                        <img src="src/desktop/img/unnc-original.png" alt="诺丁汉大学演讲现场照片" />
+                        <img src="src/desktop/img/unnc-blurred.png" />
                         <header>
                             <hgroup>
                                 <h3>《我的自学之路》</h3>
@@ -499,11 +501,11 @@
                             </hgroup>
                             <p><time datetime="2014-4-4">2014 年 4 月</time> · 宁波</p>
                         </header>
-                        <img src="src/desktop/img/unnc-blurred.png" />
-                        <img src="src/desktop/img/unnc-original.png" alt="诺丁汉大学演讲现场照片" />
                         <p>上了两个星期小学后，我为何毅然退学？我是如何成为一个 homeschooler 的？我是如何学习的？我是如何发现和培养兴趣爱好的？我在自学的过程中有什么体会和思考？</p>
                     </article>
                     <article data-index="4" data-button="暂无视频" class="video-unavailable">
+                        <img src="src/desktop/img/xjtu-original.png" alt="西安交通大学演讲现场照片" />
+                        <img src="src/desktop/img/xjtu-blurred.png" />
                         <header>
                             <hgroup>
                                 <h3>《用手机拍出“专业范”的照片》</h3>
@@ -511,8 +513,6 @@
                             </hgroup>
                             <p><time datetime="2014-4-26">2014 年 4 月</time> · 西安</p>
                         </header>
-                        <img src="src/desktop/img/xjtu-blurred.png" />
-                        <img src="src/desktop/img/xjtu-original.png" alt="西安交通大学演讲现场照片" />
                         <p>美，就在我们身边，只等待着一双眼睛去发现。那么，如何发现并记录身旁的美景呢？其实，我们并不需要多么复杂的摄影知识与器材，只要掌握几个技巧并养成一种习惯，用普通手机也能拍出“专业范”的照片。</p>
                     </article>
                     <article data-index="5" data-button="暂无视频" class="video-unavailable">
@@ -531,7 +531,7 @@
                 <div class="controller left"><i class="fa fa-arrow-left"></i></div>
                 <div sclass="controller right"><i class="fa fa-arrow-right"></i></div>
                 <!-- 滚动条，原页面在最底部 -->
-                <div class="nicescroll-rails" id="ascrail2001-hr">
+                <div class="scroll" id="ascrail2001-hr">
                 </div>
             </div>
         </section>
@@ -561,8 +561,7 @@
                     </li>
                 </ul>
             </div>
-            <!-- 原网页用块状hr来渐变 -->
-            <div class="hr"></div>
+            <!-- 原网页用块状hr来渐变,替换为伪类 -->
             <div class="content container">
                 <h2>交个朋友吧</h2>
                 <p>你可以发送 Email 至 <a href="mailto:dandyweng@dandyweng.com">dandyweng@dandyweng.com</a> 联系我。<br />
@@ -572,29 +571,31 @@
                 <div id="comment">
                     <!-- 内部背景为wool,去除网格 -->
                     <form id="commentform" action="#">
-                        <div class="full-width">
-                            <p>谢绝任何形式的商业性摄影、设计或 Web 开发等相关工作的邀请，与费用无关，望理解。</p>
-                        </div>
-                        <div class="half-width">
-                            <input name="author" data-default="称呼" type="text" />
-                        </div>
-                        <div class="full-width">
-                            <textarea name="comment" data-default="留言内容" style="resize: none;"></textarea>
-                        </div>
-                        <div class="half-width">
-                            <input name="email" data-default="邮箱" type="text">
-                        </div>
-                        <div class="half-width">
-                            <input name="url" data-default="主页" type="text">
-                        </div>
-                        <div class="full-width">
-                            <p>留言会在经过防广告审核后在我博客的留言板中公开显示。<br />
-                            填写邮箱后，当该评论被回复时将收到邮件通知。</p>
-                        </div>
-                        <div class="full-width">
-                            <button id="submit" name="submit" type="submit">
-                                <i class="fa fa-envelope"></i> 保存留言
-                            </button>
+                        <div class="marginoffset">
+                            <div class="full-width">
+                                <p>谢绝任何形式的商业性摄影、设计或 Web 开发等相关工作的邀请，与费用无关，望理解。</p>
+                            </div>
+                            <div class="half-width">
+                                <input name="author" data-default="称呼" type="text" placeholder="称呼" />
+                            </div>
+                            <div class="full-width">
+                                <textarea name="comment" data-default="留言内容" style="resize: none;" placeholder="留言内容"></textarea>
+                            </div>
+                            <div class="half-width">
+                                <input name="email" data-default="邮箱" type="text" placeholder="邮箱">
+                            </div>
+                            <div class="half-width">
+                                <input name="url" data-default="主页" type="text" placeholder="主页">
+                            </div>
+                            <div class="full-width">
+                                <p>留言会在经过防广告审核后在我博客的留言板中公开显示。<br />
+                                填写邮箱后，当该评论被回复时将收到邮件通知。</p>
+                            </div>
+                            <div class="full-width">
+                                <button id="submit" name="submit" type="submit">
+                                    <i class="fa fa-envelope"></i> 保存留言
+                                </button>
+                            </div>
                         </div>
                     </form>
                     <div style="display: none;">
@@ -652,7 +653,7 @@
                     <a href="http://www.miitbeian.gov.cn/" target="_blank">沪 ICP 备 14026031 号</a></p>
                 </div>
                 <!-- 去除网格 -->
-                <ul id="instructions">
+                <ul id="instructions" style="display:none;">
                     <li>
                         <span>1</span>
                     	<p>使用手机微信“扫一扫”右侧的二维码</p>

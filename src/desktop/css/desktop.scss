@@ -5,7 +5,7 @@
     src: url("http://v5.res.dandyweng.com/fonts/merriweather-light-webfont.woff2");
 }
 
-html, body, section, div, ul, li, h1, h2, h3, h4, h5, h6, p, figure, figcaption {
+html, body, section, div, ul, li, h1, h2, h3, h4, h5, h6, p, figure, figcaption, article, header, hgroup, form, input, textarea, button {
     margin: 0;
     padding: 0;
     border: 0;
@@ -281,7 +281,7 @@ a {
         display: inline-block;
         width: 45%;
         svg {
-            transform: translateY(-0) scale(1.1);
+            transform: translateY(-0) scale(1);
             overflow: visible;
             path, circle {
                 transition: all .5s;
@@ -472,5 +472,239 @@ a {
         bottom: 12%;
         height: 180px;
         width: 100%;
+        #lectures-inner {
+            height: 180px;
+            white-space: nowrap;
+            article {
+                position: relative;
+                display: inline-block;
+                height: 135px;
+                margin-left: 80px;
+                padding: 10px 20px 10px 155px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                color: #666;
+                background-color: #fcfcfc;
+                background-image: url(../img/crossword.webp);
+                background-size: 400px;
+                box-shadow: 0 3px 15px rgba(0, 0, 0, .1);
+                overflow: hidden;
+                img {
+                    float: left;
+                    width: 135px;
+                    margin-top: -10px;
+                    margin-left: -155px;
+                    // &:last-of-type {
+                    //     // 这里有奇怪的展现不知道原因，应该是因为marginleft导致原图片在父元素实际width为0；
+                    //     // margin-left: -135px;
+                    // }
+                }
+                i {
+                    position: absolute;
+                    top: 32px;
+                    left: 0;
+                    width: 135px;
+                    color: #fff;
+                    font-size: 26px;
+                    text-align: center;
+                    text-shadow: 0 2px 8px rgba(0,0,0,0.3),0 2px 28px rgba(0,0,0,0.8);
+                }
+                header {
+                    margin-bottom: 2px;
+                    * {
+                        display: inline;
+                    }
+                    h3, h4{
+                        font-size: 1.4rem;
+                    }
+                    h3 {
+                        font-weight: 900;
+                    }
+                }
+                p {
+                    max-width: 35em;
+                    font-size: 13px;
+                    line-height: 1.5;
+                    white-space: normal;
+                }
+            }
+        }
+        .scroll {
+            height: 10px;
+            opacity: .9;
+            background-color: #000;
+        }
+    }
+}
+
+#contact {
+    text-align: center;
+    background: #fbfbfb url(../img/snow.webp);
+    #separator {
+        height: 300px;
+        background: url(../img/overlay.png) repeat, url(../img/more.webp) no-repeat fixed;
+        background-color: #222;
+        // background-position: bottom;
+        background-size: 180px, cover;
+        p {
+            padding-top: 2.5em;
+            color: #fff;
+            text-shadow: 0 3px 5px rgba(0,0,0,0.2),0 1px 18px rgba(0,0,0,0.3);
+        }
+        ul {
+            padding-top: 20px;
+            li {
+                display: inline-block;
+                margin: 18px;
+                a {
+                    color: #fff;
+                    i {
+                        font-size: 2em;
+                        text-shadow: 0 5px 38px rgba(0,0,0,0.35);
+                    }
+                    span {
+                        display: block;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+    .content {
+        padding-top: 100px;
+        overflow: hidden;
+        p {
+            margin: 1em;
+        }
+        a {
+            color: #475f85;
+        }
+        #comment {
+            position: relative;
+            // width: 50%;
+            width: 75%;
+            margin: 65px auto 0;
+            padding: 13px;
+            padding-bottom: 0;
+            background-color: #fff;
+            background: url(../../common/img/envelope-border.png), url(../img/light_wool.webp);
+            background-size: 180px, 190px 191px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            box-shadow: 0 1px 8px 1px rgba(0,0,0,0.15),0px 20px 80px 0 rgba(0,0,0,0.2);
+            form {
+                padding: 1em;
+                background: url(../img/light_wool.webp);
+                background-size: 190px 191px;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                .marginoffset {
+                    margin-left: -40px;
+                    > * {
+                        padding: 40px 0 0 40px;
+                    }
+                }
+                .full-width {
+                    width: 100%;
+                }
+                .half-width {
+                    display: inline-block;
+                    width: 49.5%;
+                    &:nth-child(2) {
+                        display: block;
+                    }
+                    & + div.half-width {
+                        padding-left: 20px;
+                    }
+                }
+                p {
+                    font-size: 1.4rem;
+                    line-height: 1.8;
+                    color: rgba(0,0,0,0.6);
+                }
+                input, textarea {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    padding: .5em;
+                    font-size: 20px;
+                    color: rgba(0,0,0,0.6);
+                    background-color: rgba(255,255,255,0.5);
+                    border: solid 2px #dbbfc3;
+                    border-radius: .5em;
+                    outline: 0;
+                }
+                textarea {
+                    min-height: 200px;
+                    padding-top: 1em;
+                }
+                button {
+                    margin-bottom: 2em;
+                    height: 3.5em;
+                    padding: 0 5em;
+                    font-size: 1.6rem;
+                    line-height: 3.5em;
+                    color: #fff;
+                    background-color: #a55f67;
+                    outline: 0;
+                    border-radius: 8px;
+                    box-shadow: 0 1px 8px 1px rgba(0,0,0,0.3);
+                    text-shadow: 0 1px 1px rgba(255,255,255,0.3);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+#footer {
+    padding: 1.5em;
+    color: rgba(255,255,255,0.55);
+    background: url(../img/concrete_wall.webp);
+    a {
+        color: rgba(255,255,255,0.5);
+    }
+    .container {
+        margin: 20px 0 30px;
+        ul#share{
+            display: inline-block;
+            width: 50%;
+            padding-top: 15px;
+            vertical-align: top;
+            li {
+                margin: 0 8px;
+                padding: 12px 18px;
+                font-size: 1.8rem;
+                display: inline-block;
+                border: 1px solid;
+                border-color: rgba(255,255,255,0.35) rgba(255,255,255,0.45) rgba(255,255,255,0.55);
+                border-radius: 8px;
+                box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1),0 3px 18px rgba(0,0,0,0.2);
+                letter-spacing: .5px;
+            }
+        }
+        ul#more {
+            display: inline-block;
+            margin-left: 1.5em;
+            padding-left: 40px;
+            width: 45%;
+            h4 {
+                font-size: 22px;
+                font-weight: normal;
+                padding-bottom: 8px;
+            }
+        }
+        #copyright {
+            text-align: center;
+            #back-to-top {
+                width: 48px;
+                height: 48px;
+                margin: 40px auto 50px;
+                padding-top: 7px;
+                background: rgba(255,255,255,0.1);
+                box-shadow: 0 1px 8px 1px rgba(0,0,0,0.15),0px 10px 80px 5px rgba(0,0,0,0.15);
+                border-radius: 50%;
+            }
+        }
     }
 }
