@@ -89,6 +89,7 @@ a {
 }
 [data-tooltip]{
     position: relative;
+    cursor: pointer;
     &::after {
         content: attr(data-tooltip);
         position: absolute;
@@ -103,6 +104,7 @@ a {
         opacity: 0;
         white-space: nowrap;
         transition: all .5s;
+        pointer-events: none;
     }
     &:hover::after {
         bottom: 130%;
@@ -435,7 +437,7 @@ a {
 #photography {
     height: 100vh;
     padding-top: 20vh;
-    background: url("../img/crossword.webp");
+    background: url(../img/crossword.png);
     background-size: 400px;
     text-align: center;
     &::after {
@@ -524,7 +526,7 @@ a {
 #design {
     height: 100vh;
     padding-top: 26vh;
-    background: url(../img/design.webp) fixed;
+    background: url(../img/design.jpg) fixed;
     color: #fff;
     &::after {
         content: "";
@@ -591,6 +593,7 @@ a {
             figcaption {
                 position: absolute;
                 margin-left: 4px;
+                width: 100%;
                 padding: 20px;
                 border: 1px solid;
                 font-size: 14px;
@@ -609,7 +612,7 @@ a {
             }
             &.bottom figcaption {
                 top: 100%;
-                margin-top: -5px;
+                margin-top: -5%;
                 border-bottom-left-radius: 5px;
                 border-bottom-right-radius: 5px;
                 border-color: rgba(255,255,255,0) rgba(255,255,255,0.35) rgba(255,255,255,0.6)
@@ -621,7 +624,7 @@ a {
 #speech {
     height: 100vh;
     padding-top: 20vh;
-    background: url(../img/white_wall_hash.webp);
+    background: url(../img/white_wall_hash.png);
     background-size: 500px;
     overflow: hidden;
     &::after {
@@ -640,7 +643,7 @@ a {
         right: 0;
         width: 61.8%;
         height: 61.8%;
-        background: url(../img/overlay.png),url(../img/speech.webp) fixed;
+        background: url(../img/overlay.png),url(../img/speech.png) fixed;
         border: 1px solid;
         border-right: 0;
         border-color: rgba(255,255,255,0.15) rgba(255,255,255,0.6) rgba(255,255,255,0.8);
@@ -697,7 +700,7 @@ a {
                 border-radius: 5px;
                 color: #666;
                 background-color: #fcfcfc;
-                background-image: url(../img/crossword.webp);
+                background-image: url(../img/crossword.png);
                 background-size: 400px;
                 box-shadow: 0 3px 15px rgba(0, 0, 0, .1);
                 overflow: hidden;
@@ -824,7 +827,7 @@ a {
 
 #contact {
     text-align: center;
-    background: #fbfbfb url(../img/snow.webp);
+    background: #fbfbfb url(../img/snow.png);
     &::after {
         content: "";
         position: absolute;
@@ -838,7 +841,7 @@ a {
     #separator {
         position: relative;
         height: 300px;
-        background: url(../img/overlay.png), url(../img/more.webp) fixed;
+        background: url(../img/overlay.png), url(../img/more.jpg) fixed;
         background-color: #222;
         // background-position: bottom;
         background-size: 256px 256px, cover;
@@ -902,7 +905,7 @@ a {
             padding: 13px;
             padding-bottom: 0;
             background-color: #fff;
-            background: url(../../common/img/envelope-border.png), url(../img/light_wool.webp);
+            background: url(../../common/img/envelope-border.png), url(../img/light_wool.png);
             background-size: 180px, 190px 191px;
             border-top-left-radius: 5px;
             border-top-right-radius: 5px;
@@ -910,7 +913,7 @@ a {
             @media (max-width: 1440px) {
                 width: 75%;
             }
-            &::after {
+            &::before {
                 content: "";
                 position: absolute;
                 width: 100%;
@@ -923,7 +926,7 @@ a {
             }
             form {
                 padding: 1em;
-                background: url(../img/light_wool.webp);
+                background: url(../img/light_wool.png);
                 background-size: 190px 191px;
                 border-top-left-radius: 5px;
                 border-top-right-radius: 5px;
@@ -940,8 +943,10 @@ a {
                     }
                 }
                 .half-width {
+                    position: relative;
                     display: inline-block;
                     width: 49.5%;
+                    z-index: 2;
                     &:nth-child(2) {
                         display: block;
                     }
@@ -995,7 +1000,7 @@ a {
 #footer {
     padding: 1.5em;
     color: rgba(255,255,255,0.55);
-    background: url(../img/concrete_wall.webp);
+    background: url(../img/concrete_wall.png);
     a {
         color: rgba(255,255,255,0.5);
         transition: color .5s;
@@ -1012,7 +1017,7 @@ a {
             text-align: right;
             vertical-align: top;
             li {
-                margin: 0 8px;
+                margin: 0 6px;
                 padding: 12px 18px;
                 font-size: 1.8rem;
                 display: inline-block;

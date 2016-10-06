@@ -69,7 +69,7 @@
 #### Added
 - 准备不同设备下的背景图片
 - 使用desktop和mobile的template并注入
-- 完成desktop下的一级DOM数
+- 完成desktop下的一级DOM树
 
 #### Ready
 - 学习HTML5的Web组件化中的[Template]
