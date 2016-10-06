@@ -16,6 +16,12 @@ html, body, section, div, ul, li, h1, h2, h3, h4, h5, h6, p, figure, figcaption,
 html {
   font-size: 62.5%;
   font-family: "merriweather", SimSun, "宋体", sans-serif; }
+  @media (max-width: 1440px) {
+    html {
+      font-size: 60%; } }
+  @media (max-width: 1024px) {
+    html {
+      font-size: 55%; } }
 
 body {
   font-size: 2.2rem;
@@ -76,6 +82,26 @@ a {
 .notification.clickable {
   cursor: pointer; }
 
+[data-tooltip] {
+  position: relative; }
+  [data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    padding: 8px 15px;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 1px 3px 20px 0 rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    white-space: nowrap;
+    transition: all .5s; }
+  [data-tooltip]:hover::after {
+    bottom: 130%;
+    opacity: 1; }
+
 #intro {
   height: 100vh;
   padding: 30vh 0 0;
@@ -97,6 +123,7 @@ a {
         transition: opacity .5s; }
   #intro .content {
     margin: 0 auto 130px;
+    -webkit-box-reflect: below 120% -webkit-gradient(linear, left top, left bottom, color-stop(10%, rgba(255, 255, 255, 0)), color-stop(80%, rgba(255, 255, 255, 0.05)), color-stop(100%, rgba(255, 255, 255, 0.2)));
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
     #intro .content #portait {
       margin: -130px auto 0;
@@ -334,7 +361,7 @@ a {
     border-radius: 5px;
     opacity: .8;
     cursor: pointer; }
-  #travel::before {
+  #travel::after {
     content: "";
     position: absolute;
     width: 100%;
@@ -349,6 +376,14 @@ a {
   background: url("../img/crossword.webp");
   background-size: 400px;
   text-align: center; }
+  #photography::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 90px;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0)); }
   #photography .content p {
     margin: 1rem 0 30px; }
   #photography .content #montage {
@@ -408,13 +443,22 @@ a {
 
 #design {
   height: 100vh;
-  padding-top: 20vh;
+  padding-top: 26vh;
   background: url(../img/design.webp) fixed;
   color: #fff; }
+  #design::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0, rgba(60, 60, 60, 0.1) 30%, transparent 100%); }
   #design .content {
     text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5), 0 1px 18px rgba(0, 0, 0, 0.5);
     left: 48%;
-    width: 50%; }
+    width: 50%;
+    padding: 2em; }
     #design .content h2 {
       margin-bottom: 23px; }
     #design .content p {
@@ -430,13 +474,22 @@ a {
       opacity: .8; }
   #design #showcase {
     position: absolute;
-    top: 30%;
-    width: 45%;
-    padding-left: 5%; }
+    top: 37%;
+    left: 12%;
+    width: 30%;
+    transition: all .5s; }
+    @media (max-width: 1440px) {
+      #design #showcase {
+        top: 35%;
+        left: 7%;
+        width: 40%; } }
+    @media (max-width: 1024px) {
+      #design #showcase {
+        top: 40%; } }
     #design #showcase figure {
       display: inline-block;
-      width: 45%;
-      margin: 0 4% 3.5% 0;
+      width: 42%;
+      margin: 0 5.5% 4.5% 0;
       position: relative;
       opacity: .9; }
       #design #showcase figure:hover figcaption {
@@ -476,6 +529,15 @@ a {
   background: url(../img/white_wall_hash.webp);
   background-size: 500px;
   overflow: hidden; }
+  #speech::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 90px;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+    border-top: 1px solid rgba(255, 255, 255, 0.13); }
   #speech #window {
     position: absolute;
     top: 0;
@@ -494,7 +556,19 @@ a {
       height: 75%;
       width: 60%;
       background: rgba(0, 0, 0, 0.5);
-      box-shadow: 0 1px 8px 1.5px rgba(0, 0, 0, 0.35), 0px 20px 70px 8px rgba(0, 0, 0, 0.35); }
+      box-shadow: 0 1px 8px 1.5px rgba(0, 0, 0, 0.35), 0px 20px 70px 8px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+      transition: all .5s; }
+      @media (max-width: 1024px) {
+        #speech #window #player {
+          height: 60%; } }
+      #speech #window #player p {
+        position: absolute;
+        top: 50%;
+        margin-top: -0.5em;
+        width: 100%;
+        color: #ddd;
+        text-align: center; }
   #speech .content {
     width: 40%;
     left: 3%;
@@ -508,7 +582,8 @@ a {
     width: 100%; }
     #speech #lectures #lectures-inner {
       height: 180px;
-      white-space: nowrap; }
+      white-space: nowrap;
+      overflow-x: scroll; }
       #speech #lectures #lectures-inner article {
         position: relative;
         display: inline-block;
@@ -523,11 +598,35 @@ a {
         background-size: 400px;
         box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
         overflow: hidden; }
+        #speech #lectures #lectures-inner article::before {
+          content: attr(data-button);
+          position: absolute;
+          width: 135px;
+          height: 75px;
+          bottom: 0;
+          left: 0;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, transparent 80%);
+          color: #fff;
+          font-size: 1.4rem;
+          text-align: center;
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 2px 28px #000;
+          border-bottom-left-radius: 5px;
+          transition: opacity .5s;
+          opacity: 0;
+          z-index: 2; }
+        #speech #lectures #lectures-inner article.video-available::before {
+          height: 58px; }
         #speech #lectures #lectures-inner article img {
           float: left;
           width: 135px;
           margin-top: -10px;
-          margin-left: -155px; }
+          margin-left: -155px;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+          opacity: 1; }
+          #speech #lectures #lectures-inner article img:last-of-type {
+            opacity: 0;
+            transition: opacity .5s; }
         #speech #lectures #lectures-inner article i {
           position: absolute;
           top: 32px;
@@ -536,7 +635,9 @@ a {
           color: #fff;
           font-size: 26px;
           text-align: center;
-          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 2px 28px rgba(0, 0, 0, 0.8); }
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 2px 28px rgba(0, 0, 0, 0.8);
+          opacity: 0;
+          transition: opacity .5s; }
         #speech #lectures #lectures-inner article header {
           margin-bottom: 2px; }
           #speech #lectures #lectures-inner article header * {
@@ -550,19 +651,81 @@ a {
           font-size: 13px;
           line-height: 1.5;
           white-space: normal; }
+        #speech #lectures #lectures-inner article:hover img, #speech #lectures #lectures-inner article:hover i, #speech #lectures #lectures-inner article:hover:before {
+          opacity: 1; }
+    #speech #lectures .controller {
+      position: absolute;
+      top: -2px;
+      width: 160px;
+      height: 140px;
+      padding: 0 25px;
+      color: rgba(0, 0, 0, 0.35);
+      line-height: 140px;
+      cursor: pointer;
+      transition: color .5s;
+      z-index: 3; }
+      #speech #lectures .controller::before, #speech #lectures .controller::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 1px;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 0, rgba(53, 53, 53, 0.1) 50%, transparent 100%); }
+      #speech #lectures .controller::after {
+        top: auto;
+        bottom: 0; }
+      #speech #lectures .controller:hover {
+        color: rgba(0, 0, 0, 0.65); }
+      #speech #lectures .controller.left {
+        left: 0;
+        background: linear-gradient(to right, #fff 0, rgba(255, 255, 255, 0.65) 50%, rgba(255, 255, 255, 0) 100%);
+        text-align: left; }
+      #speech #lectures .controller.right {
+        right: 0;
+        text-align: right;
+        background: linear-gradient(to left, #fff 0, rgba(255, 255, 255, 0.65) 50%, rgba(255, 255, 255, 0) 100%); }
+        #speech #lectures .controller.right::before, #speech #lectures .controller.right::after {
+          background: linear-gradient(to left, rgba(0, 0, 0, 0.2) 0, rgba(53, 53, 53, 0.1) 50%, transparent 100%); }
     #speech #lectures .scroll {
       height: 10px;
-      opacity: .9;
+      opacity: 0;
       background-color: #000; }
 
 #contact {
   text-align: center;
   background: #fbfbfb url(../img/snow.webp); }
+  #contact::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    top: 300px;
+    left: 0;
+    border-top: 1px solid #fff;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), transparent); }
   #contact #separator {
+    position: relative;
     height: 300px;
-    background: url(../img/overlay.png) repeat, url(../img/more.webp) no-repeat fixed;
+    background: url(../img/overlay.png), url(../img/more.webp) fixed;
     background-color: #222;
-    background-size: 180px, cover; }
+    background-size: 256px 256px, cover; }
+    @media (max-width: 1440px) {
+      #contact #separator {
+        background-size: 180px, cover;
+        background-position: bottom;
+        background-repeat: repeat, no-repeat; } }
+    @media (max-width: 1024px) {
+      #contact #separator {
+        background-size: 180px, contain; } }
+    #contact #separator::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 50px;
+      top: 0;
+      left: 0;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0, rgba(60, 60, 60, 0.1) 30%, transparent 100%); }
     #contact #separator p {
       padding-top: 2.5em;
       color: #fff;
@@ -579,7 +742,11 @@ a {
             text-shadow: 0 5px 38px rgba(0, 0, 0, 0.35); }
           #contact #separator ul li a span {
             display: block;
-            font-size: 16px; }
+            font-size: 16px;
+            opacity: 0;
+            transition: opacity .5s; }
+        #contact #separator ul li:hover span {
+          opacity: 1; }
   #contact .content {
     padding-top: 100px;
     overflow: hidden; }
@@ -597,6 +764,19 @@ a {
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.15), 0px 20px 80px 0 rgba(0, 0, 0, 0.2); }
+      @media (max-width: 1440px) {
+        #contact .content #comment {
+          width: 75%; } }
+      #contact .content #comment::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 180px;
+        top: 0;
+        left: 0;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)); }
       #contact .content #comment form {
         padding: 1em;
         background: url(../img/light_wool.webp);
@@ -609,6 +789,8 @@ a {
             padding: 40px 0 0 40px; }
         #contact .content #comment form .full-width {
           width: 100%; }
+          #contact .content #comment form .full-width:first-child {
+            padding-top: 0; }
         #contact .content #comment form .half-width {
           display: inline-block;
           width: 49.5%; }
@@ -631,6 +813,8 @@ a {
           border: solid 2px #dbbfc3;
           border-radius: .5em;
           outline: 0; }
+          #contact .content #comment form input:focus, #contact .content #comment form textarea:focus {
+            border-color: #9ca9be; }
         #contact .content #comment form textarea {
           min-height: 200px;
           padding-top: 1em; }
@@ -653,13 +837,17 @@ a {
   color: rgba(255, 255, 255, 0.55);
   background: url(../img/concrete_wall.webp); }
   #footer a {
-    color: rgba(255, 255, 255, 0.5); }
+    color: rgba(255, 255, 255, 0.5);
+    transition: color .5s; }
+    #footer a:hover {
+      color: rgba(255, 255, 255, 0.9); }
   #footer .container {
-    margin: 20px 0 30px; }
+    margin: 20px auto; }
     #footer .container ul#share {
       display: inline-block;
       width: 50%;
-      padding-top: 15px;
+      padding: 15px 30px 0 0;
+      text-align: right;
       vertical-align: top; }
       #footer .container ul#share li {
         margin: 0 8px;
@@ -673,14 +861,18 @@ a {
         letter-spacing: .5px; }
     #footer .container ul#more {
       display: inline-block;
-      margin-left: 1.5em;
-      padding-left: 40px;
+      padding-left: 70px;
       width: 45%; }
+      #footer .container ul#more li:not(:first-child) {
+        line-height: 1.2; }
       #footer .container ul#more h4 {
         font-size: 22px;
         font-weight: normal;
         padding-bottom: 8px; }
+      #footer .container ul#more a {
+        font-size: 16px; }
     #footer .container #copyright {
+      width: 100%;
       text-align: center; }
       #footer .container #copyright #back-to-top {
         width: 48px;
@@ -689,6 +881,15 @@ a {
         padding-top: 7px;
         background: rgba(255, 255, 255, 0.1);
         box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.15), 0px 10px 80px 5px rgba(0, 0, 0, 0.15);
-        border-radius: 50%; }
+        border-radius: 50%;
+        transition: background-color .5s; }
+        #footer .container #copyright #back-to-top path {
+          transition: all .5s; }
+        #footer .container #copyright #back-to-top:hover {
+          background: rgba(255, 255, 255, 0.6); }
+          #footer .container #copyright #back-to-top:hover path {
+            fill: rgba(57, 69, 75, 0.8); }
+      #footer .container #copyright p {
+        font-size: 14px; }
 
 /*# sourceMappingURL=desktop.css.map */

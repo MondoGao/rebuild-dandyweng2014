@@ -5,8 +5,25 @@
 
 ### Unreleased
 #### Added
-- 增加可以用css完成的动画效果
+- 去除页面原滚动条，使用原生js完成两处平滑滚动
+- 探测页面滚动大小播放进入退出动画
+- 地图悬浮提示效果
+- 头像翻页效果
+- 图片lightbox效果
+- 页面预加载效果
+
+#### Prepared
+- wheel/mousewheel事件
+
+### [0.1.0] - 2016-10-06
+#### Added
+- 增加全部可以用css完成的动画效果
 - 增加关于桌面的响应式
+
+#### Ready
+- 元素scrollTop/scrollLeft属性控制滚动（在overflow: hidden下也依然有效）
+- 学习scroll(), scrollTo()等方法
+- 学习实现平滑滚动的方法
 
 ### [0.0.6] - 2016-10-06
 #### Added
