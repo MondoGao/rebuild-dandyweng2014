@@ -13,7 +13,7 @@
 
 ### [0.1.2] - 2016-10-06
 #### Added
-- 页面预加载效果
+- 页面加载效果
 - 自动纠正页面位置
 - 下一页箭头平滑滚动
 - 地图悬浮提示效果
@@ -103,6 +103,7 @@
 [0.0.6]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.6
 [0.1.0]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.0
 [0.1.1]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.1
+[0.1.2]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.2
 
 [Shadow DOM]: http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
 [Template]: http://www.html5rocks.com/en/tutorials/webcomponents/template/
