@@ -10,9 +10,6 @@
 - 图片lightbox效果
 - 页面预加载效果
 
-#### Prepared
-- wheel/mousewheel事件
-
 ### [0.1.1] - 2016-10-06
 #### Added
 - 去除页面原滚动条，使用原生js完成页面平滑滚动
