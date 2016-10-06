@@ -27,9 +27,11 @@ body {
   font-size: 2.2rem;
   color: rgba(0, 0, 0, 0.75);
   line-height: 1.65;
-  min-width: 800px; }
+  min-width: 800px;
+  overflow-y: hidden; }
 
 section {
+  opacity: 1;
   position: relative; }
   section .content {
     position: relative; }
@@ -98,7 +100,7 @@ a {
     box-shadow: 1px 3px 20px 0 rgba(0, 0, 0, 0.3);
     opacity: 0;
     white-space: nowrap;
-    transition: all .5s;
+    transition: all .8s;
     pointer-events: none; }
   [data-tooltip]:hover::after {
     bottom: 130%;
@@ -111,6 +113,10 @@ a {
   background-size: cover;
   text-align: center;
   color: #fff; }
+  #intro > * {
+    opacity: 1; }
+  #intro.inactive > * {
+    opacity: .1; }
   #intro > ul {
     position: absolute;
     top: 0;
@@ -126,7 +132,8 @@ a {
   #intro .content {
     margin: 0 auto 130px;
     -webkit-box-reflect: below 120% -webkit-gradient(linear, left top, left bottom, color-stop(10%, rgba(255, 255, 255, 0)), color-stop(80%, rgba(255, 255, 255, 0.05)), color-stop(100%, rgba(255, 255, 255, 0.2)));
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all .8s; }
     #intro .content #portait {
       margin: -130px auto 0;
       width: 100px;
@@ -154,11 +161,13 @@ a {
     #intro .content h2 {
       display: block;
       margin-top: 50px;
-      font-size: 2.8rem; }
+      font-size: 2.8rem;
+      transition: all .8s; }
     #intro .content p {
       font-size: 2rem;
       line-height: 1.6;
-      margin-top: 1rem; }
+      margin-top: 1rem;
+      transition: all .8s; }
   #intro a.photo-title {
     position: absolute;
     right: 8px;
@@ -175,13 +184,25 @@ a {
   color: #fff;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   overflow: hidden; }
+  #homeschool > * {
+    opacity: 1; }
+  #homeschool.inactive > * {
+    opacity: 0; }
+  #homeschool.inactive .content {
+    transform: translateY(180%); }
+  #homeschool.inactive .timeline {
+    top: -100px; }
+    #homeschool.inactive .timeline .timeline-row {
+      margin-bottom: -50px; }
   #homeschool p {
     margin-bottom: 1.5rem; }
   #homeschool .content {
     width: 50%;
     left: 50%;
     padding-right: 5em;
-    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3), 0 1px 18px rgba(0, 0, 0, 0.3); }
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3), 0 1px 18px rgba(0, 0, 0, 0.3);
+    transform: translateY(0);
+    transition: all .8s; }
     @media (max-width: 1440px) {
       #homeschool .content {
         width: 60%;
@@ -201,7 +222,7 @@ a {
     padding: 20px 0 20px 20%;
     white-space: nowrap;
     opacity: .5;
-    transition: opacity .5s; }
+    transition: all .8s; }
     @media (max-width: 1440px) {
       #homeschool .timeline {
         left: 5%;
@@ -223,7 +244,8 @@ a {
       border-radius: 2px; }
     #homeschool .timeline .timeline-row {
       margin-bottom: 20px;
-      transform: translate(-69px, 0); }
+      transform: translate(-69px, 0);
+      transition: all .8s; }
       @media (min-height: 970px) {
         #homeschool .timeline .timeline-row {
           margin-bottom: 25px; } }
@@ -260,7 +282,7 @@ a {
         text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5), 0px 5px 28px rgba(0, 0, 0, 0.5);
         padding-left: 40px;
         opacity: 0;
-        transition: all .5s; }
+        transition: all .8s; }
         #homeschool .timeline .timeline-row .timeline-content h3 {
           font-size: 1.6rem;
           font-weight: normal;
@@ -298,7 +320,13 @@ a {
   background-size: 400px;
   color: #fff;
   overflow-x: hidden;
-  transition: all .5s; }
+  transition: all .8s; }
+  #travel.inactive .content {
+    transform: translateX(-80%);
+    opacity: 0; }
+  #travel.inactive #map {
+    transform: translateX(80%);
+    opacity: 0; }
   @media (max-width: 1550px) {
     #travel {
       padding-left: 5%; } }
@@ -310,7 +338,9 @@ a {
     width: 55%;
     padding: 3.5em 2.5em 3.5em 2.5em;
     text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-    transition: all .5s;
+    transition: all .8s;
+    transform: translateX(0);
+    opacity: 1;
     white-space: nowrap; }
     @media (max-width: 1440px) {
       #travel .content {
@@ -323,17 +353,18 @@ a {
     display: inline-block;
     width: 35%;
     vertical-align: top;
-    padding-top: 100px; }
+    transform: translateX(0);
+    opacity: 1;
+    padding-top: 100px;
+    transition: all .8s; }
     #travel #map svg {
       transform: scale(1.8);
       overflow: visible;
       transition: transform .5s; }
       #travel #map svg path, #travel #map svg circle {
-        transition: all .5s; }
+        transition: all .8s; }
       #travel #map svg circle {
-        transform: scale(0.625);
-        transform-origin: center;
-        transition: transform .5s; }
+        transition: all .8s; }
       #travel #map svg g:first-child path:hover {
         fill: #ccc;
         fill-opacity: .8; }
@@ -378,6 +409,39 @@ a {
   background: url(../img/crossword.png);
   background-size: 400px;
   text-align: center; }
+  #photography.inactive .content {
+    opacity: .1; }
+  #photography.inactive a img {
+    -webkit-transform: rotateY(90deg) !important;
+    transform: rotateY(90deg) !important; }
+  #photography.inactive a:nth-child(1) img {
+    transition-delay: 0.26s !important; }
+  #photography.inactive a:nth-child(2) img {
+    transition-delay: 0.24s !important; }
+  #photography.inactive a:nth-child(3) img {
+    transition-delay: 0.22s !important; }
+  #photography.inactive a:nth-child(4) img {
+    transition-delay: 0.2s !important; }
+  #photography.inactive a:nth-child(5) img {
+    transition-delay: 0.18s !important; }
+  #photography.inactive a:nth-child(6) img {
+    transition-delay: 0.16s !important; }
+  #photography.inactive a:nth-child(7) img {
+    transition-delay: 0.14s !important; }
+  #photography.inactive a:nth-child(8) img {
+    transition-delay: 0.12s !important; }
+  #photography.inactive a:nth-child(9) img {
+    transition-delay: 0.1s !important; }
+  #photography.inactive a:nth-child(10) img {
+    transition-delay: 0.08s !important; }
+  #photography.inactive a:nth-child(11) img {
+    transition-delay: 0.06s !important; }
+  #photography.inactive a:nth-child(12) img {
+    transition-delay: 0.04s !important; }
+  #photography.inactive a:nth-child(13) img {
+    transition-delay: 0.02s !important; }
+  #photography.inactive a:nth-child(14) img {
+    transition-delay: 0s !important; }
   #photography::after {
     content: "";
     position: absolute;
@@ -386,68 +450,116 @@ a {
     top: 0;
     left: 0;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0)); }
-  #photography .content p {
-    margin: 1rem 0 30px; }
-  #photography .content #montage {
-    max-width: 1440px;
-    margin: 0 auto;
-    height: 248px;
-    overflow-y: hidden; }
-    #photography .content #montage a {
-      position: relative;
-      display: inline-block;
-      width: 180px;
-      height: 120px; }
-      #photography .content #montage a img {
-        width: 100%;
-        border-radius: 2px; }
-      #photography .content #montage a::before, #photography .content #montage a::after {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        color: #fff;
-        text-align: left;
-        text-indent: -1em;
-        opacity: 0;
-        text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3), 0 1px 18px rgba(0, 0, 0, 0.3);
-        transition: all .8s ease .05s; }
-      #photography .content #montage a::before {
-        content: attr(data-location);
-        line-height: 11.5;
+  #photography .content {
+    opacity: 1;
+    transition: opacity .8s; }
+    #photography .content p {
+      margin: 1rem 0 30px; }
+    #photography .content #montage {
+      max-width: 1440px;
+      margin: 0 auto;
+      height: 248px;
+      overflow-y: hidden; }
+      #photography .content #montage a {
+        position: relative;
+        display: inline-block;
+        width: 180px;
+        height: 120px;
+        transform-style: preserve-3d; }
+        #photography .content #montage a img {
+          width: 100%;
+          border-radius: 2px;
+          -webkit-transform: rotateY(0);
+          transform: rotateY(0);
+          transition: transform 1s; }
+        #photography .content #montage a:nth-child(1) img {
+          transition-delay: 0s; }
+        #photography .content #montage a:nth-child(2) img {
+          transition-delay: 0.02s; }
+        #photography .content #montage a:nth-child(3) img {
+          transition-delay: 0.04s; }
+        #photography .content #montage a:nth-child(4) img {
+          transition-delay: 0.06s; }
+        #photography .content #montage a:nth-child(5) img {
+          transition-delay: 0.08s; }
+        #photography .content #montage a:nth-child(6) img {
+          transition-delay: 0.1s; }
+        #photography .content #montage a:nth-child(7) img {
+          transition-delay: 0.12s; }
+        #photography .content #montage a:nth-child(8) img {
+          transition-delay: 0.14s; }
+        #photography .content #montage a:nth-child(9) img {
+          transition-delay: 0.16s; }
+        #photography .content #montage a:nth-child(10) img {
+          transition-delay: 0.18s; }
+        #photography .content #montage a:nth-child(11) img {
+          transition-delay: 0.2s; }
+        #photography .content #montage a:nth-child(12) img {
+          transition-delay: 0.22s; }
+        #photography .content #montage a:nth-child(13) img {
+          transition-delay: 0.24s; }
+        #photography .content #montage a:nth-child(14) img {
+          transition-delay: 0.26s; }
+        #photography .content #montage a::before, #photography .content #montage a::after {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          color: #fff;
+          text-align: left;
+          text-indent: -1em;
+          opacity: 0;
+          text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3), 0 1px 18px rgba(0, 0, 0, 0.3);
+          transition: all .8s ease .05s;
+          z-index: 2; }
+        #photography .content #montage a::before {
+          content: attr(data-location);
+          line-height: 11.5;
+          font-size: 12px; }
+        #photography .content #montage a::after {
+          content: attr(data-camarts-title);
+          line-height: 10;
+          font-size: 18px;
+          background: linear-gradient(to bottom, transparent 0, rgba(60, 60, 60, 0.3) 60%, rgba(0, 0, 0, 0.85) 100%); }
+        #photography .content #montage a:hover::before {
+          opacity: .8;
+          text-indent: 1.6em; }
+        #photography .content #montage a:hover::after {
+          opacity: 1;
+          text-indent: 1em; }
+    #photography .content #montage-controller {
+      margin: 30px auto 40px; }
+      #photography .content #montage-controller a {
+        margin: 10px;
+        color: #333;
+        font-size: 16px;
+        opacity: .6; }
+      #photography .content #montage-controller i {
+        margin-right: 5px;
+        padding: 7px;
+        padding-left: 8px;
+        border: 1px solid #333;
+        border-radius: 50%;
         font-size: 12px; }
-      #photography .content #montage a::after {
-        content: attr(data-camarts-title);
-        line-height: 10;
-        font-size: 18px;
-        background: linear-gradient(to bottom, transparent 0, rgba(60, 60, 60, 0.3) 60%, rgba(0, 0, 0, 0.85) 100%); }
-      #photography .content #montage a:hover::before {
-        opacity: .8;
-        text-indent: 1.6em; }
-      #photography .content #montage a:hover::after {
-        opacity: 1;
-        text-indent: 1em; }
-  #photography .content #montage-controller {
-    margin: 30px auto 40px; }
-    #photography .content #montage-controller a {
-      margin: 10px;
-      color: #333;
-      font-size: 16px;
-      opacity: .6; }
-    #photography .content #montage-controller i {
-      margin-right: 5px;
-      padding: 7px;
-      padding-left: 8px;
-      border: 1px solid #333;
-      border-radius: 50%;
-      font-size: 12px; }
 
 #design {
   height: 100vh;
   padding-top: 26vh;
   background: url(../img/design.jpg) fixed;
-  color: #fff; }
+  color: #fff;
+  overflow: hidden; }
+  #design.inactive .content {
+    opacity: .1; }
+    #design.inactive .content h2 {
+      transform: translateX(60%); }
+    #design.inactive .content p {
+      transform: translateX(80%); }
+    #design.inactive .content hr, #design.inactive .content hr + p {
+      transform: translateX(100%); }
+  #design.inactive #showcase {
+    transform: translateX(-100%);
+    opacity: 0; }
   #design::after {
     content: "";
     position: absolute;
@@ -460,7 +572,12 @@ a {
     text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5), 0 1px 18px rgba(0, 0, 0, 0.5);
     left: 48%;
     width: 50%;
-    padding: 2em; }
+    padding: 2em;
+    opacity: 1;
+    transition: opacity 1s; }
+    #design .content > * {
+      transform: translateX(0);
+      transition: transform 1.5s; }
     #design .content h2 {
       margin-bottom: 23px; }
     #design .content p {
@@ -479,7 +596,9 @@ a {
     top: 37%;
     left: 12%;
     width: 30%;
-    transition: all .5s; }
+    transform: translateX(0);
+    opacity: 1;
+    transition: all .8s, opacity 1s, transform 1.5s; }
     @media (max-width: 1440px) {
       #design #showcase {
         top: 35%;
@@ -513,7 +632,18 @@ a {
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.4);
         pointer-events: none;
         opacity: 0;
-        transition: all .5s; }
+        transition: all .8s; }
+        #design #showcase figure figcaption::after {
+          position: absolute;
+          content: "";
+          height: 90px;
+          width: 100%;
+          left: 0;
+          bottom: 0;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0, rgba(60, 60, 60, 0.1) 30%, transparent 100%); }
+        #design #showcase figure figcaption h3 {
+          font-size: 28px;
+          text-align: center; }
       #design #showcase figure.top figcaption {
         bottom: 100%;
         border-top-left-radius: 5px;
@@ -525,6 +655,10 @@ a {
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.6); }
+        #design #showcase figure.bottom figcaption::after {
+          top: 0;
+          bottom: auto;
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0, rgba(60, 60, 60, 0.1) 30%, transparent 100%); }
 
 #speech {
   height: 100vh;
@@ -547,7 +681,7 @@ a {
     right: 0;
     width: 61.8%;
     height: 61.8%;
-    background: url(../img/overlay.png), url(../img/speech.png) fixed;
+    background: url(../img/overlay.png), url(../img/speech.jpg) fixed;
     border: 1px solid;
     border-right: 0;
     border-color: rgba(255, 255, 255, 0.15) rgba(255, 255, 255, 0.6) rgba(255, 255, 255, 0.8);
@@ -561,7 +695,7 @@ a {
       background: rgba(0, 0, 0, 0.5);
       box-shadow: 0 1px 8px 1.5px rgba(0, 0, 0, 0.35), 0px 20px 70px 8px rgba(0, 0, 0, 0.35);
       overflow: hidden;
-      transition: all .5s; }
+      transition: all .8s; }
       @media (max-width: 1024px) {
         #speech #window #player {
           height: 60%; } }
@@ -698,6 +832,22 @@ a {
 #contact {
   text-align: center;
   background: #fbfbfb url(../img/snow.png); }
+  #contact.inactive #separator p {
+    opacity: 0; }
+  #contact.inactive #separator ul li {
+    opacity: 0;
+    transform: translateY(100%); }
+    #contact.inactive #separator ul li:nth-child(1) {
+      transition-delay: 0.6s; }
+    #contact.inactive #separator ul li:nth-child(2) {
+      transition-delay: 0.4s; }
+    #contact.inactive #separator ul li:nth-child(3) {
+      transition-delay: 0.2s; }
+    #contact.inactive #separator ul li:nth-child(4) {
+      transition-delay: 0s; }
+  #contact.inactive .content h2, #contact.inactive .content > p {
+    transform: translateY(200px);
+    transition-delay: 0; }
   #contact::after {
     content: "";
     position: absolute;
@@ -732,12 +882,25 @@ a {
     #contact #separator p {
       padding-top: 2.5em;
       color: #fff;
-      text-shadow: 0 3px 5px rgba(0, 0, 0, 0.2), 0 1px 18px rgba(0, 0, 0, 0.3); }
+      text-shadow: 0 3px 5px rgba(0, 0, 0, 0.2), 0 1px 18px rgba(0, 0, 0, 0.3);
+      opacity: 1;
+      transition: opacity 1s; }
     #contact #separator ul {
       padding-top: 20px; }
       #contact #separator ul li {
         display: inline-block;
-        margin: 18px; }
+        margin: 18px;
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 1s, transform 1.5s; }
+        #contact #separator ul li:nth-child(1) {
+          transition-delay: 0s; }
+        #contact #separator ul li:nth-child(2) {
+          transition-delay: 0.2s; }
+        #contact #separator ul li:nth-child(3) {
+          transition-delay: 0.4s; }
+        #contact #separator ul li:nth-child(4) {
+          transition-delay: 0.6s; }
         #contact #separator ul li a {
           color: #fff; }
           #contact #separator ul li a i {
@@ -753,7 +916,14 @@ a {
   #contact .content {
     padding-top: 100px;
     overflow: hidden; }
+    #contact .content h2 {
+      transform: translateY(0);
+      transition: transform 1.5s;
+      transition-delay: .4s; }
     #contact .content p {
+      transform: translateY(0);
+      transition: transform 1.5s;
+      transition-delay: .5s;
       margin: 1em; }
     #contact .content #comment {
       position: relative;
@@ -889,7 +1059,7 @@ a {
         border-radius: 50%;
         transition: background-color .5s; }
         #footer .container #copyright #back-to-top path {
-          transition: all .5s; }
+          transition: all .8s; }
         #footer .container #copyright #back-to-top:hover {
           background: rgba(255, 255, 255, 0.6); }
           #footer .container #copyright #back-to-top:hover path {

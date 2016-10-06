@@ -5,8 +5,6 @@
 
 ### Unreleased
 #### Added
-- 去除页面原滚动条，使用原生js完成两处平滑滚动
-- 探测页面滚动大小播放进入退出动画
 - 地图悬浮提示效果
 - 头像翻页效果
 - 图片lightbox效果
@@ -14,6 +12,20 @@
 
 #### Prepared
 - wheel/mousewheel事件
+
+### [0.1.1] - 2016-10-06
+#### Added
+- 去除页面原滚动条，使用原生js完成页面平滑滚动
+- 探测页面滚动大小播放进入退出动画js及css
+
+#### Ready
+- 复习animation，transition
+- 学习getBoundingClientRect方法
+- 学习wheel/mousewheel事件
+- 学习触发浏览器全屏
+
+#### Deprecated
+- 全屏后无法滚动页面
 
 ### [0.1.0] - 2016-10-06
 #### Added
