@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge, chrome=1">
     <title>翁天信 · Dandy Weng</title>
+    <link rel="stylesheet" href="src/common/css/index.css">
     <link rel="stylesheet" href="dep/font-awesome/css/font-awesome.min.css">
 </head>
-<body>
+<body class="loading">
     <template id="desktop">
         <link rel="stylesheet" href="src/desktop/css/desktop.css">
         <template id="section-angle">
@@ -681,10 +682,6 @@
                 </ul>
             </div>
         </footer>
-        <!-- 加载图标 -->
-        <div id="loading-spinner">
-            <div></div>
-        </div>
         <!-- 加载进度条 -->
         <div id="nprogress">
             <div class="bar"></div>
@@ -694,6 +691,11 @@
     <template id="mobile">
 
     </template>
+
+    <!-- 加载图标 -->
+    <div id="loading-spinner">
+        <div></div>
+    </div>
     <script src="src/common/js/index.js" charset="utf-8"></script>
 </body>
 </html>

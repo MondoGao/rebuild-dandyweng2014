@@ -5,10 +5,21 @@
 
 ### Unreleased
 #### Added
-- 地图悬浮提示效果
 - 头像翻页效果
 - 图片lightbox效果
+
+#### Prepare
+- 原生js实现getJSON方法
+
+### [0.1.2] - 2016-10-06
+#### Added
 - 页面预加载效果
+- 自动纠正页面位置
+- 下一页箭头平滑滚动
+- 地图悬浮提示效果
+
+#### Ready
+- 分析地图数据的获取方法（http://api.dandyweng.com/map-data.php?lang=zh&show-years=true&jsoncallback=?）
 
 ### [0.1.1] - 2016-10-06
 #### Added

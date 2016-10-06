@@ -1,5 +1,56 @@
-var tempTimer;
+var tempTimer, pageTimer;
 changeActive();
+addAngle();
+
+var maptip = document.getElementById('map-hover');
+document.querySelectorAll('g')[0].onmousemove = function(e) {
+    changeMaptipPos(e, 'data-code');
+};
+document.querySelectorAll('g')[1].onmousemove = function(e) {
+    changeMaptipPos(e, 'data-index');
+};
+document.querySelectorAll('g')[0].onmouseout = function(e) {
+    maptip.style.opacity = 0;
+};
+document.querySelectorAll('g')[1].onmouseout = function(e) {
+    maptip.style.opacity = 0;
+};
+document.querySelectorAll('g')[0].onmouseover = function(e) {
+    maptip.style.opacity = 1;
+};
+document.querySelectorAll('g')[1].onmouseover = function(e) {
+    maptip.style.opacity = 1;
+};
+function changeMaptipPos(e, data) {
+    maptip.innerHTML = e.srcElement.getAttribute(data);
+    maptip.style.top = e.clientY + 'px';
+    maptip.style.left = e.clientX + 'px';
+    console.log(e);
+}
+document.querySelectorAll('path').forEach(function(ele,index,array) {
+    ele.onmousemove = function(e) {
+
+    };
+});
+
+function addAngle() {
+    var sections = document.querySelectorAll('section');
+    var angleTemplate = document.querySelector('#section-angle');
+    document.querySelectorAll("section").forEach(function(element, index, array) {
+        var clone = document.importNode(angleTemplate.content, true);
+        if(index != 6)
+            element.appendChild(clone);
+    });
+    // 无法在上面添加href
+    document.querySelectorAll('.angle').forEach(function(element, index, array) {
+        if(index != 6)
+            element.href = '#' + sections[index + 1].id;
+            element.onclick = function(e) {
+                e.preventDefault();
+                scrollPosition(sections[index + 1].id);
+            };
+    });
+}
 
 document.body.onwheel = function(e) {
     clearInterval(tempTimer);
@@ -14,6 +65,12 @@ document.body.onwheel = function(e) {
         var tempDeltaY =  deltaY / 10;
         if (Math.abs(tempDeltaY) < 0.5) {
             clearInterval(tempTimer);
+            clearTimeout(pageTimer);
+            //页面滚动超过contact后不再纠正位置
+            if(getScrollOffsets().y < document.getElementById('contact').offsetTop)
+                pageTimer = setTimeout(function() {
+                    scrollPosition(document.querySelector('section:not(.inactive)').id);
+                }, 1000);
         }
         window.scrollBy(0, tempDeltaY);
         deltaY -= tempDeltaY;
@@ -120,9 +177,8 @@ function getViewPortSize(_w) {//获取页面的窗口大小
 }
 
 function scrollPosition(_obj) {//参数_obj可以是任何页面上存在的元素的id，或者是指定元素本身
-    var targetX, targetY;
+    var targetY;
     if (!_obj) { //如果不指定锚点元素，就跳到页面顶端0，0位置
-        targetX = 0;
         targetY = 0;
     } else {
         if (typeof (_obj) == "string") {
@@ -130,40 +186,33 @@ function scrollPosition(_obj) {//参数_obj可以是任何页面上存在的元�
         } else {
             _obj = _obj;
         }
-        targetX = _obj.getBoundingClientRect().left + getScrollOffsets().x;
         targetY = _obj.getBoundingClientRect().top + getScrollOffsets().y;
     }
 
     //如果目标元素的位置在最后一屏，那就指定目标位置为页面底部
     //如果目标元素的位置为负数，就指定目标位置为页面顶部
-    var maxTargetX=document.body.scrollWidth-getViewPortSize().x;
-    if(targetX>=maxTargetX) targetX=maxTargetX;
-    if(targetX<0) targetX=0;
     var maxTargetY=document.body.scrollHeight-getViewPortSize().y;
     if(targetY>=maxTargetY) targetY=maxTargetY;
     if(targetY<0) targetY=0;
     clearInterval(tempTimer);
 
     tempTimer = setInterval(function () {
+
+        changeActive();
         var currentY = getScrollOffsets().y;
-        var currentX = getScrollOffsets().x;
         //跳转位置的缓冲公式
         var tempTargetY = currentY - (currentY - targetY) / 10;
-        var tempTargetX = currentX - (currentX - targetX) / 10;
         //由于缓冲公式会生成小数，而scrollTo函数会省略小数点后面的数字，所以要对跳转的坐标做一些微调
         if (Math.abs(tempTargetY - currentY) < 1) {
             tempTargetY - currentY > 0 ? tempTargetY++ : tempTargetY--;
         }
-        if (Math.abs(tempTargetX - currentX) < 1) {
-            tempTargetX - currentX > 0 ? tempTargetX++ : tempTargetX--;
-        }
         //页面跳转
-        window.scrollTo(tempTargetX, tempTargetY);
+        window.scrollTo(0, tempTargetY);
         //到达指定位置后清除一下Interval
-        if ( Math.abs(getScrollOffsets().y - targetY) <= 2 && Math.abs(getScrollOffsets().x - targetX) <= 2  ) {
+        if ( Math.abs(getScrollOffsets().y - targetY) <= 2 ) {
             clearInterval(tempTimer);
-            window.scrollTo(targetX, targetY);
+            window.scrollTo(0, targetY);
             //console.log("done");
         }
-    }, 10);
+    }, 15);
 }
