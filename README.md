@@ -93,6 +93,8 @@
 [0.0.4]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.4
 [0.0.5]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.5
 [0.0.6]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.0.6
+[0.1.0]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.0
+[0.1.1]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.1
 
 [Shadow DOM]: http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
 [Template]: http://www.html5rocks.com/en/tutorials/webcomponents/template/
