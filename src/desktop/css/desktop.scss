@@ -30,6 +30,7 @@ body {
     line-height: 1.65;
     min-width: 800px;
     overflow-y: hidden;
+    height: 100vh;
     // scroll-behavior: smooth;
 }
 section {
@@ -166,6 +167,7 @@ a.angle {
         text-shadow: 0 2px 5px rgba(0,0,0,0.2);
         transition: all .8s;
         #portait {
+            position: relative;
             margin: -130px auto 0;
             width: 100px;
             height: 100px;
@@ -176,19 +178,67 @@ a.angle {
                 width: 100px;
                 height: 100px;
                 overflow: hidden;
-                transition: all .6s;
+                // transition: all .6s;
                 transform: translate(0, 0);
                 .offset-inner {
                     position: relative;
-                    width: 100%;
-                    height: 100%;
+                    width: 100px;
+                    height: 100px;
                     overflow: hidden;
-                    border-radius: 50%;
                     .sticker-img {
-                        width: 100%;
-                        height: 100%;
+                        width: 100px;
+                        height: 100px;
                         background: url(../img/square.jpg);
+                        border-radius: 50%;
                         background-size: contain;
+                        overflow: hidden;
+                    }
+                    .sticker-back {
+                        position: absolute;
+                        &.right {
+                            top: 0;
+                            left: 100px;
+                            .sticker-shadow {
+                                top: 0;
+                                right: 0;
+                                height: 100%;
+                                background: linear-gradient(to left, rgba(0,0,0,0) 0%,rgba(0,0,0,0.01) 70%,rgba(0,0,0,0.6) 100%);
+                            }
+                        }
+                        &.down {
+                            top: 100px;
+                            left: 0;
+                            .sticker-shadow {
+                                bottom: 0;
+                                right: 0;
+                                width: 100%;
+                                background: linear-gradient(to top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.01) 70%,rgba(0,0,0,0.6) 100%);
+                            }
+                        }
+                        &.left {
+                            top: 0;
+                            right: 100px;
+                            .sticker-shadow {
+                                top: 0;
+                                left: 0;
+                                height: 100%;
+                                background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,0.01) 70%,rgba(0,0,0,0.6) 100%);
+                            }
+                        }
+                        &.up {
+                            bottom: 100px;
+                            left: 0;
+                            .sticker-shadow {
+                                top: 0;
+                                right: 0;
+                                width: 100%;
+                                background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.01) 70%,rgba(0,0,0,0.6) 100%);
+                            }
+                        }
+                    }
+                    .sticker-shadow {
+                        position: absolute;
+                        opacity: 0.9;
                     }
                 }
             }

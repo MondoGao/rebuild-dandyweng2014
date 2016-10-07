@@ -1,30 +1,118 @@
 var tempTimer, pageTimer;
 var maptip = document.getElementById('map-hover');
 window.onload = function() {
-        changeActive();
-        addAngle();
-        bindMapEvent();
+    changeActive();
+    addAngle();
+    bindMapEvent();
+    bindPortaitEvent();
 };
 
+// var portaitState = false;
+function bindPortaitEvent() {
+    var enterDirection = "";
+    var portait = document.getElementById('portait');
+    var offOut = portait.querySelector('.offset-outer');
+    var offIn = portait.querySelector('.offset-inner');
+    var front = offIn.querySelector('.sticker-front');
+    var back = offIn.querySelector('.sticker-back');
+    portait.onmousemove = function(e) {
+        var relaTop = e.clientY - this.getBoundingClientRect().top;
+        var relaLeft = e.clientX - this.getBoundingClientRect().left;
+        switch (enterDirection) {
+            case 'right':
+                offOut.style.width = 50 + relaLeft/2 + 'px';
+                back.classList.remove('up','right','left','down');
+                back.classList.add('right');
+                back.style.transform = 'translateX(-' + (100 - relaLeft) + 'px) scaleX(-1)';
+                back.querySelector('.sticker-shadow').style.height = "100%";
+                back.querySelector('.sticker-shadow').style.width = 55 - relaLeft/2 + 'px';
+                // back.querySelector('.sticker-shadow').style.right = 30 - relaLeft/2 + 'px';
+                break;
+            case 'down':
+                offOut.style.height = 50 + relaTop/2 + 'px';
+                back.classList.remove('up','right','left','down');
+                back.classList.add('down');
+                back.style.transform = 'translateY(-' + (100 - relaTop) + 'px) scaleY(-1)';
+                back.querySelector('.sticker-shadow').style.width = '100%';
+                back.querySelector('.sticker-shadow').style.height = 55 - relaTop/2 + 'px';
+                break;
+            case 'left':
+                offOut.style.width = (100 - relaLeft/2) + 'px';
+                offOut.style.transform = 'translateX(' + relaLeft/2 + 'px)';
+                offIn.style.transform = 'translateX(-' + relaLeft/2 + 'px)';
+                back.classList.remove('up','right','left','down');
+                back.classList.add('left');
+                back.style.transform = 'translateX(' + relaLeft + 'px) scaleX(-1)';
+                back.querySelector('.sticker-shadow').style.height = '100%';
+                back.querySelector('.sticker-shadow').style.width = relaLeft/2 + 5 + 'px';
+                break;
+            case 'up':
+                offOut.style.height = (100 - relaTop/2) + 'px';
+                offOut.style.transform = 'translateY(' + relaTop/2 + 'px)';
+                offIn.style.transform = 'translateY(-' + relaTop/2 + 'px)';
+                back.classList.remove('up','right','left','down');
+                back.classList.add('up');
+                back.style.transform = 'translateY(' + relaTop + 'px) scaleY(-1)';
+                back.querySelector('.sticker-shadow').style.width = '100%';
+                back.querySelector('.sticker-shadow').style.height = 5 + relaTop/2 + 'px';
+                break;
+            default:
+            console.log("default");
+            break;
+        }
+    };
+    portait.onmouseenter = function(e) {
+        offOut.style.transition = offIn.style.transition = back.style.transition = 'none';
+        var relaTop = e.clientY - this.getBoundingClientRect().top;
+        var relaLeft = e.clientX - this.getBoundingClientRect().left;
+        enterDirection = getEnterDirection(relaTop, relaLeft, this);
+        // portaitState = true;
+    };
+    portait.onmouseleave = function(e) {
+        offOut.style.transition = offIn.style.transition = 'all .4s linear';
+        back.style.transition = 'transform .4s linear';
+        // portaitState = false;
+        offOut.style.height = offOut.style.width = '100px';
+        offOut.style.transform = 'translateX(0) translateY(0)';
+        offIn.style.transform = 'translateX(0) translateY(0)';
+        switch(enterDirection) {
+            case 'right':
+            case 'left':
+            back.style.transform = 'translateX(0) translateY(0) scaleX(-1)';
+            break;
+            case 'up':
+            case 'down':
+            back.style.transform = 'translateX(0) translateY(0) scaleY(-1)';
+            break;
+            default:
+            break;
+        }
+    };
+}
+
+function getEnterDirection(relaT, relaL, ele) {
+    var y = relaT - ele.getBoundingClientRect().height/2;
+    var x = -relaL + ele.getBoundingClientRect().width/2;
+    // 从x右轴开始，逆时针方向为证取角度
+    var angle = Math.atan2(y, x) *180/Math.PI + 180;
+    // 通过round将划分线放在对角线上
+    var direction = Math.round(angle / 90);
+    // 方便使用，从“direction”进入
+    switch(direction) {
+        case 1:
+        return 'up';
+        case 2:
+        return 'left';
+        case 3:
+        return 'down';
+        default:
+        return 'right';
+    }
+}
+
 function bindMapEvent() {
-    document.querySelectorAll('g')[0].onmousemove = function(e) {
-        changeMaptipPos(e, 'data-code');
-    };
-    document.querySelectorAll('g')[1].onmousemove = function(e) {
-        changeMaptipPos(e, 'data-index');
-    };
-    document.querySelectorAll('g')[0].onmouseout = function(e) {
-        maptip.style.opacity = 0;
-    };
-    document.querySelectorAll('g')[1].onmouseout = function(e) {
-        maptip.style.opacity = 0;
-    };
-    document.querySelectorAll('g')[0].onmouseover = function(e) {
-        maptip.style.opacity = 1;
-    };
-    document.querySelectorAll('g')[1].onmouseover = function(e) {
-        maptip.style.opacity = 1;
-    };
+    bindGEvent(document.querySelectorAll('g')[0], 'data-code');
+    bindGEvent(document.querySelectorAll('g')[1], 'data-index');
     document.querySelectorAll('path').forEach(function(ele,index,array) {
         ele.onmousemove = function(e) {
 
@@ -32,30 +120,52 @@ function bindMapEvent() {
     });
 }
 
+function bindGEvent(g, data) {
+    g.onmousemove = function(e) {
+        changeMaptipPos(e, data);
+    };
+    g.onmouseout = function(e) {
+        maptip.style.opacity = 0;
+    };
+    g.onmouseover = function(e) {
+        maptip.style.opacity = 1;
+    };
+}
+
 function changeMaptipPos(e, data) {
     maptip.innerHTML = e.srcElement.getAttribute(data);
     maptip.style.top = e.clientY + 'px';
     maptip.style.left = e.clientX + 'px';
-    console.log(e);
+    // console.log(e);
 }
 
 function addAngle() {
     var sections = document.querySelectorAll('section');
     var angleTemplate = document.querySelector('#section-angle');
-    document.querySelectorAll("section").forEach(function(element, index, array) {
-        var clone = document.importNode(angleTemplate.content, true);
-        if(index != 6)
-            element.appendChild(clone);
-    });
-    // 无法在上面添加href
-    document.querySelectorAll('.angle').forEach(function(element, index, array) {
-        if(index != 6)
-            element.href = '#' + sections[index + 1].id;
-            element.onclick = function(e) {
-                e.preventDefault();
-                scrollPosition(sections[index + 1].id);
-            };
-    });
+    if(!sections.forEach) {
+        for(var sec of sections) {
+            var clone = document.importNode(angleTemplate.content, true);
+            if(sec.id != 'contact')
+                sec.appendChild(clone);
+            // Todo: 适配火狐
+            // clone.href = '#' + sec.id;
+        }
+    } else {
+        sections.forEach(function(element, index, array) {
+            var clone = document.importNode(angleTemplate.content, true);
+            if(index != 6)
+                element.appendChild(clone);
+        });
+        // 无法在上面添加href
+        document.querySelectorAll('.angle').forEach(function(element, index, array) {
+            if(index != 6)
+                element.href = '#' + sections[index + 1].id;
+                element.onclick = function(e) {
+                    e.preventDefault();
+                    scrollPosition(sections[index + 1].id);
+                };
+        });
+    }
 }
 
 document.body.onwheel = function(e) {

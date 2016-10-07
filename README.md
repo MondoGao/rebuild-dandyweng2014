@@ -5,11 +5,18 @@
 
 ### Unreleased
 #### Added
-- 头像翻页效果
 - 图片lightbox效果
 
 #### Prepare
 - 原生js实现getJSON方法
+- body高度和滚动问题
+
+### [0.1.3] - 2016-10-07
+#### Added
+- 头像翻页效果
+
+#### Fixed
+- 一些小修正
 
 ### [0.1.2] - 2016-10-06
 #### Added
@@ -104,6 +111,7 @@
 [0.1.0]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.0
 [0.1.1]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.1
 [0.1.2]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.2
+[0.1.3]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.3
 
 [Shadow DOM]: http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
 [Template]: http://www.html5rocks.com/en/tutorials/webcomponents/template/
