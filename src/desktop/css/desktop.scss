@@ -132,6 +132,110 @@ a.angle {
     }
 }
 
+#lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    opacity: 0;
+    transition: opacity 1s;
+    pointer-events: none;
+    &.show {
+        opacity: .8;
+        pointer-events: auto;
+    }
+}
+#lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    padding: 50px 20px 100px;
+    transition: opacity 1s;
+    pointer-events: none;
+    &.show {
+        opacity: 1;
+        .out-container {
+            pointer-events: auto;
+        }
+    }
+    .out-container {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 4px;
+        border-radius: 3px;
+        transition: width 1s,height 1s;
+        .lbcontainer {
+            position: relative;
+            img {
+                width: 92px;
+                height: 92px;
+                border-radius: 3px;
+                opacity: 0;
+                transition: opacity 1s,width 1s,height 1s;
+                &.complete {
+                    opacity: 1;
+                }
+            }
+            .nav, .loader {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+            }
+            .nav {
+                color: rgba(0,0,0,.3);
+                text-shadow: 0 0 10px rgba(0,0,0,.3);
+                .prev, .next {
+                    height: 100%;
+                    i {
+                        transition: color 1s;
+                        position: relative;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        font-size: 100px;
+                    }
+                    &:hover {
+                        color: rgba(255,255,255,.5);
+                    }
+                }
+                .prev {
+                    float: left;
+                    width: 30%;
+                }
+                .next {
+                    float: right;
+                    width: 68%;
+                    text-align: right;
+                }
+            }
+            .loader {
+                text-align: center;
+                font-size: 24px;
+                opacity: .9;
+                transition: opacity 1s;
+                pointer-events: none;
+                &.complete {
+                    opacity: 0;
+                }
+                &:before{
+                    content:'';
+                    display:inline-block;
+                    vertical-align:middle;
+                    height:100%;
+                }
+            }
+        }
+    }
+}
+
 
 #intro {
     height: 100vh;

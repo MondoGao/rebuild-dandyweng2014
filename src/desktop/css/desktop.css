@@ -123,6 +123,92 @@ a.angle {
   a.angle:hover {
     opacity: .8 !important; }
 
+#lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0;
+  transition: opacity 1s;
+  pointer-events: none; }
+  #lightbox-overlay.show {
+    opacity: .8;
+    pointer-events: auto; }
+
+#lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  padding: 50px 20px 100px;
+  transition: opacity 1s;
+  pointer-events: none; }
+  #lightbox.show {
+    opacity: 1; }
+    #lightbox.show .out-container {
+      pointer-events: auto; }
+  #lightbox .out-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 4px;
+    border-radius: 3px;
+    transition: width 1s,height 1s; }
+    #lightbox .out-container .lbcontainer {
+      position: relative; }
+      #lightbox .out-container .lbcontainer img {
+        width: 92px;
+        height: 92px;
+        border-radius: 3px;
+        opacity: 0;
+        transition: opacity 1s,width 1s,height 1s; }
+        #lightbox .out-container .lbcontainer img.complete {
+          opacity: 1; }
+      #lightbox .out-container .lbcontainer .nav, #lightbox .out-container .lbcontainer .loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%; }
+      #lightbox .out-container .lbcontainer .nav {
+        color: rgba(0, 0, 0, 0.3);
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.3); }
+        #lightbox .out-container .lbcontainer .nav .prev, #lightbox .out-container .lbcontainer .nav .next {
+          height: 100%; }
+          #lightbox .out-container .lbcontainer .nav .prev i, #lightbox .out-container .lbcontainer .nav .next i {
+            transition: color 1s;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 100px; }
+          #lightbox .out-container .lbcontainer .nav .prev:hover, #lightbox .out-container .lbcontainer .nav .next:hover {
+            color: rgba(255, 255, 255, 0.5); }
+        #lightbox .out-container .lbcontainer .nav .prev {
+          float: left;
+          width: 30%; }
+        #lightbox .out-container .lbcontainer .nav .next {
+          float: right;
+          width: 68%;
+          text-align: right; }
+      #lightbox .out-container .lbcontainer .loader {
+        text-align: center;
+        font-size: 24px;
+        opacity: .9;
+        transition: opacity 1s;
+        pointer-events: none; }
+        #lightbox .out-container .lbcontainer .loader.complete {
+          opacity: 0; }
+        #lightbox .out-container .lbcontainer .loader:before {
+          content: '';
+          display: inline-block;
+          vertical-align: middle;
+          height: 100%; }
+
 #intro {
   height: 100vh;
   padding: 30vh 0 0;

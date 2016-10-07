@@ -4,12 +4,17 @@
 纪录实习期的学习和该项目更新纪录
 
 ### Unreleased
-#### Added
-- 图片lightbox效果
-
 #### Prepare
 - 原生js实现getJSON方法
 - body高度和滚动问题
+
+### [1.0.0] - 2016-10-08
+#### Added
+- 图片lightbox效果
+- 摄像部分缩略图和大图全部离线
+
+#### Ready
+- 爆肝
 
 ### [0.1.3] - 2016-10-07
 #### Added
@@ -112,6 +117,7 @@
 [0.1.1]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.1
 [0.1.2]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.2
 [0.1.3]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.3
+[1.0.0]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.0.0
 
 [Shadow DOM]: http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
 [Template]: http://www.html5rocks.com/en/tutorials/webcomponents/template/
