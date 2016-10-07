@@ -1,37 +1,41 @@
 var tempTimer, pageTimer;
+var maptip = document.getElementById('map-hover');
 changeActive();
 addAngle();
+bindMapEvent();
 
-var maptip = document.getElementById('map-hover');
-document.querySelectorAll('g')[0].onmousemove = function(e) {
-    changeMaptipPos(e, 'data-code');
-};
-document.querySelectorAll('g')[1].onmousemove = function(e) {
-    changeMaptipPos(e, 'data-index');
-};
-document.querySelectorAll('g')[0].onmouseout = function(e) {
-    maptip.style.opacity = 0;
-};
-document.querySelectorAll('g')[1].onmouseout = function(e) {
-    maptip.style.opacity = 0;
-};
-document.querySelectorAll('g')[0].onmouseover = function(e) {
-    maptip.style.opacity = 1;
-};
-document.querySelectorAll('g')[1].onmouseover = function(e) {
-    maptip.style.opacity = 1;
-};
+function bindMapEvent() {
+    document.querySelectorAll('g')[0].onmousemove = function(e) {
+        changeMaptipPos(e, 'data-code');
+    };
+    document.querySelectorAll('g')[1].onmousemove = function(e) {
+        changeMaptipPos(e, 'data-index');
+    };
+    document.querySelectorAll('g')[0].onmouseout = function(e) {
+        maptip.style.opacity = 0;
+    };
+    document.querySelectorAll('g')[1].onmouseout = function(e) {
+        maptip.style.opacity = 0;
+    };
+    document.querySelectorAll('g')[0].onmouseover = function(e) {
+        maptip.style.opacity = 1;
+    };
+    document.querySelectorAll('g')[1].onmouseover = function(e) {
+        maptip.style.opacity = 1;
+    };
+    document.querySelectorAll('path').forEach(function(ele,index,array) {
+        ele.onmousemove = function(e) {
+
+        };
+    });
+}
+
 function changeMaptipPos(e, data) {
     maptip.innerHTML = e.srcElement.getAttribute(data);
     maptip.style.top = e.clientY + 'px';
     maptip.style.left = e.clientX + 'px';
     console.log(e);
 }
-document.querySelectorAll('path').forEach(function(ele,index,array) {
-    ele.onmousemove = function(e) {
-
-    };
-});
 
 function addAngle() {
     var sections = document.querySelectorAll('section');
@@ -54,9 +58,10 @@ function addAngle() {
 
 document.body.onwheel = function(e) {
     clearInterval(tempTimer);
+    clearTimeout(pageTimer);
     changeActive();
 
-    var deltaY = e.deltaY*10;
+    var deltaY = e.deltaY*5;
     // ff的delta比其他浏览器小，扩大
     if (getBrowserVersion() == 'firefox') {
         deltaY *= 12;
