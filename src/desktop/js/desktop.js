@@ -1,8 +1,10 @@
 var tempTimer, pageTimer;
 var maptip = document.getElementById('map-hover');
-changeActive();
-addAngle();
-bindMapEvent();
+window.onload = function() {
+        changeActive();
+        addAngle();
+        bindMapEvent();
+};
 
 function bindMapEvent() {
     document.querySelectorAll('g')[0].onmousemove = function(e) {
