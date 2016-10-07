@@ -109,6 +109,8 @@ function bindLightboxEvent() {
     };
     lbOverlay.onclick = function() {
         lbOverlay.className = lb.className = "";
+        lbLoader.classList.remove('complete');
+        lbImg.className = "";
     };
 }
 
