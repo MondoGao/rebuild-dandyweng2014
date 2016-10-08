@@ -14,7 +14,7 @@
 - 演讲列表滚动及滚动按钮事件
 - 其他小事件的实现
 
-### [1.0.2] - 2016-10-08
+### 1.0.2 - 2016-10-08
 #### Added
 - 视频点击后显示embed效果
 
@@ -128,7 +128,6 @@
 [0.1.2]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.2
 [0.1.3]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v0.1.3
 [1.0.1]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.0.1
-[1.0.2]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.0.2
 [1.0.3]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.0.3
 
 [Shadow DOM]: http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
