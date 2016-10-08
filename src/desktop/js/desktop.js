@@ -4,10 +4,69 @@ var lbData = [];
 window.onload = function() {
     changeActive();
     addAngle();
-    bindMapEvent();
     bindPortaitEvent();
     bindLightboxEvent();
+    document.querySelector('article.video-available').onclick = function() {
+        var p = document.getElementById('player').getElementsByTagName('p')[0];
+        var iframe = document.createElement('iframe');
+        iframe.src = 'http://player.youku.com/embed/' + document.querySelector('[data-youku]').dataset.youku;
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('quality', 'high');
+        iframe.setAttribute('style','width:100%;height:100%;opacity:0;transition:opacity 1s;');
+        iframe.onload = function() {
+            console.log('video is ready');
+            setTimeout(function() {
+                p.style.opacity = 0;
+                p.style.pointerEvents = 'none';
+                iframe.style.opacity = 1;
+            },700);
+        };
+        document.getElementById('player').insertBefore(iframe, p);
+        document.getElementById('player').className = "";
+    };
+    document.getElementById('trypophobia').onclick = function() {
+        document.getElementById('map').querySelectorAll('g')[1].style.opacity = 0;
+        document.getElementById('map').querySelectorAll('g')[1].style.pointerEvents = 'none';
+        this.style.opacity = 0;
+    };
+    document.getElementById('lectures-inner').onwheel = function (e) {
+        e.stopPropagation();
+        // var controller = document.getElementById('lectures').querySelectorAll('.controller');
+        articleScroll(-e.deltaY*5, this);
+
+    };
+    var controller = document.getElementById('lectures').querySelectorAll('.controller');
+    controller[0].onclick = function() {
+        articleScroll(300, document.getElementById('lectures-inner'));
+    };
+    controller[1].onclick = function() {
+        articleScroll(-300, document.getElementById('lectures-inner'));
+    };
+    bindMapEvent();
 };
+
+function articleScroll(deltaX, _this) {
+    var controller = document.getElementById('lectures').querySelectorAll('.controller');
+    var marginLeftN = Number(window.getComputedStyle(_this)['margin-left'].split('px')[0]);
+    // ff的delta比其他浏览器小，扩大
+    if (getBrowserVersion() == 'firefox') {
+        deltaX *= 12;
+    }
+    // console.log();
+    if(deltaX > 0 && marginLeftN + deltaX > 0) {
+        deltaX = -marginLeftN;
+        controller[0].style.opacity = 0;
+        controller[1].style.opacity = 1;
+    } else if (deltaX < 0 && marginLeftN + deltaX < -_this.scrollWidth + getViewPortSize().x) {
+        deltaX = -_this.scrollWidth + getViewPortSize().x - marginLeftN;
+        controller[0].style.opacity = 1;
+        controller[1].style.opacity = 0;
+    } else {
+        controller[0].style.opacity = 1;
+        controller[1].style.opacity = 1;
+    }
+    _this.style.marginLeft = marginLeftN + deltaX + 'px';
+}
 
 function changeImg (dest, lbImg, lb, lbLoader) {
     if(Number(lbImg.dataset.index) + dest < 0) {
@@ -43,6 +102,39 @@ function changeImg (dest, lbImg, lb, lbLoader) {
     };
     img.src = 'src/desktop/img/lightbox/' + lbData[Number(lbImg.dataset.index) + dest];
 }
+
+function resetImage(_a, lbOverlay, lb, lbImg,lbLoader) {
+    lbOverlay.className = lb.className = "show";
+    // _a = this;
+    var img = new Image();
+    img.onload = function() {
+        var imgw = img.width;
+        var imgh = img.height;
+        var wDh = imgw/imgh;
+        var maxw = document.body.clientWidth - 40;
+        var maxh = document.body.clientHeight - 150;
+        if(wDh > maxw/maxh) {
+            var finW = Math.max(imgw, maxw);
+            lb.querySelector('.out-container').style.width = finW + 'px';
+            lb.querySelector('.out-container').style.height = finW/wDh + 'px';
+            lbImg.style.width = finW - 8 + 'px';
+            lbImg.style.height = finW/wDh - 8 + 'px';
+        } else {
+            var finH = Math.max(imgh, maxh);
+            lb.querySelector('.out-container').style.height = finH + 'px';
+            lbImg.style.height = finH - 8 + 'px';
+            lb.querySelector('.out-container').style.width =  finH * wDh + 'px';
+            lbImg.style.width = finH * wDh - 8 + 'px';
+        }
+        lbImg.src = img.src;
+        lbImg.dataset.index = _a.querySelector('img').dataset.index;
+        setTimeout(function() {
+            lbLoader.classList.add('complete');
+            lbImg.className = "complete";
+        }, 1000);
+    };
+    img.src = 'src/desktop/img/lightbox/' + _a.querySelector('img').dataset.highres;
+}
 var lbtimer;
 function bindLightboxEvent() {
     var lbOverlay = document.getElementById('lightbox-overlay');
@@ -55,40 +147,10 @@ function bindLightboxEvent() {
     for(var a of montage.getElementsByTagName('a')) {
         lbData.push(a.querySelector('img').dataset.highres);
         a.querySelector('img').dataset.index = index;
-        a.onclick = function (e) {
+        a.onclick = function(e) {
             e.preventDefault();
-            lbOverlay.className = lb.className = "show";
-            _a = this;
-            var img = new Image();
-            img.onload = function() {
-                var imgw = img.width;
-                var imgh = img.height;
-                var wDh = imgw/imgh;
-                var maxw = document.body.clientWidth - 40;
-                var maxh = document.body.clientHeight - 150;
-                if(wDh > maxw/maxh) {
-                    var finW = Math.max(imgw, maxw);
-                    lb.querySelector('.out-container').style.width = finW + 'px';
-                    lb.querySelector('.out-container').style.height = finW/wDh + 'px';
-                    lbImg.style.width = finW - 8 + 'px';
-                    lbImg.style.height = finW/wDh - 8 + 'px';
-                } else {
-                    var finH = Math.max(imgh, maxh);
-                    lb.querySelector('.out-container').style.height = finH + 'px';
-                    lbImg.style.height = finH - 8 + 'px';
-                    lb.querySelector('.out-container').style.width =  finH * wDh + 'px';
-                    lbImg.style.width = finH * wDh - 8 + 'px';
-                }
-                lbImg.src = img.src;
-                lbImg.dataset.index = _a.querySelector('img').dataset.index;
-                setTimeout(function() {
-                    lbLoader.classList.add('complete');
-                    lbImg.className = "complete";
-                }, 1000);
-            };
-            img.src = 'src/desktop/img/lightbox/' + this.querySelector('img').dataset.highres;
-
-        };
+            resetImage(this, lbOverlay, lb, lbImg, lbLoader);
+        }
         index++;
     }
     lbNav.querySelector('.prev').onclick = function() {

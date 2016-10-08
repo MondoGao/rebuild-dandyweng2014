@@ -503,9 +503,14 @@ a.angle {
       transform: scale(1.8);
       overflow: visible;
       transition: transform .5s; }
+      #travel #map svg g {
+        opacity: 1;
+        transition: opacity 1s; }
       #travel #map svg path, #travel #map svg circle {
         transition: all .8s; }
       #travel #map svg circle {
+        transform: scale(0.625);
+        transform-origin: center;
         transition: all .8s; }
       #travel #map svg g:first-child path:hover {
         fill: #ccc;
@@ -550,6 +555,7 @@ a.angle {
     border-color: rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.45) rgba(255, 255, 255, 0.55);
     border-radius: 5px;
     opacity: .8;
+    transition: opacity 1s;
     cursor: pointer; }
   #travel::after {
     content: "";
@@ -856,6 +862,9 @@ a.angle {
       @media (max-width: 1024px) {
         #speech #window #player {
           height: 60%; } }
+      #speech #window #player.hide {
+        height: 0;
+        box-shadow: none; }
       #speech #window #player p {
         position: absolute;
         top: 50%;
@@ -875,9 +884,11 @@ a.angle {
     height: 180px;
     width: 100%; }
     #speech #lectures #lectures-inner {
+      margin-left: 0;
       height: 180px;
       white-space: nowrap;
-      overflow-x: scroll; }
+      overflow-x: hidden;
+      transition: margin-left .5s; }
       #speech #lectures #lectures-inner article {
         position: relative;
         display: inline-block;
@@ -956,7 +967,7 @@ a.angle {
       color: rgba(0, 0, 0, 0.35);
       line-height: 140px;
       cursor: pointer;
-      transition: color .5s;
+      transition: color .5s, opacity .8s;
       z-index: 3; }
       #speech #lectures .controller::before, #speech #lectures .controller::after {
         content: "";
@@ -972,6 +983,7 @@ a.angle {
       #speech #lectures .controller:hover {
         color: rgba(0, 0, 0, 0.65); }
       #speech #lectures .controller.left {
+        opacity: 0;
         left: 0;
         background: linear-gradient(to right, #fff 0, rgba(255, 255, 255, 0.65) 50%, rgba(255, 255, 255, 0) 100%);
         text-align: left; }

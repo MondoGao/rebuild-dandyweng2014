@@ -20,6 +20,16 @@ body.loading {
     }
 }
 
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    opacity: 1;
+    transition: opacity 1s;
+}
 #loading-spinner {
     position: fixed;
     top: 50%;
@@ -30,6 +40,8 @@ body.loading {
     border-radius: 100%;
     box-shadow: 0 0 0 2px rgba(255,255,255,0.25),0px 3px 23px 2px rgba(0,0,0,0.3);
     z-index: 999;
+    opacity: 1;
+    transition: opacity 1s;
     div {
         width: 18px;
         height: 18px;
