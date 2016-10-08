@@ -29,6 +29,7 @@ body.loading {
     background: #fff;
     opacity: 1;
     transition: opacity 1s;
+    z-index: 998;
 }
 #loading-spinner {
     position: fixed;

@@ -8,6 +8,10 @@
 - body高度和滚动问题
 - 函数闭包
 
+### [1.1.1] - 2016-10-08
+#### Fixed
+- 提升加载遮罩的位置修复在该节点未加载前的不良体验
+
 ### [1.1.0] - 2016-10-08
 #### Added
 - 为从服务器获取网页增加获取静态mapdata数据并绑定到悬浮层上
@@ -142,6 +146,7 @@
 [1.0.1]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.0.1
 [1.0.3]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.0.3
 [1.1.0]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.1.0
+[1.1.1]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.1.1
 
 [Shadow DOM]: http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
 [Template]: http://www.html5rocks.com/en/tutorials/webcomponents/template/
