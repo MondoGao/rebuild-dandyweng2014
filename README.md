@@ -8,6 +8,10 @@
 - body高度和滚动问题
 - 函数闭包
 
+### [1.1.2] - 2016-10-08
+#### Added
+- 全屏按钮随分辨率自动显隐
+
 ### [1.1.1] - 2016-10-08
 #### Fixed
 - 提升加载遮罩的位置修复在该节点未加载前的不良体验
@@ -147,6 +151,7 @@
 [1.0.3]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.0.3
 [1.1.0]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.1.0
 [1.1.1]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.1.1
+[1.1.2]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.1.2
 
 [Shadow DOM]: http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
 [Template]: http://www.html5rocks.com/en/tutorials/webcomponents/template/

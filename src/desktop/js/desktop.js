@@ -7,6 +7,10 @@ window.onload = function() {
     addAngle();
     bindPortaitEvent();
     bindLightboxEvent();
+    isFullScreen();
+    window.onresize = function () {
+        isFullScreen();
+    };
     document.querySelector('article.video-available').onclick = function() {
         var p = document.getElementById('player').getElementsByTagName('p')[0];
         var iframe = document.createElement('iframe');
@@ -47,6 +51,16 @@ window.onload = function() {
     getMapdata();
     bindMapEvent();
 };
+
+function isFullScreen () {
+    if(getViewPortSize().y > 800 && getViewPortSize().x > 1440) {
+        document.querySelector('#enter-fullscreen').style.opacity = 0;
+        document.querySelector('#enter-fullscreen').style.pointerEvents = 'none';
+    } else {
+        document.querySelector('#enter-fullscreen').style.opacity = 1;
+        document.querySelector('#enter-fullscreen').style.pointerEvents = 'auto';
+    }
+}
 
 function getMapdata() {
     try {
@@ -386,6 +400,8 @@ document.body.onwheel = function(e) {
 };
 
 document.querySelector('#enter-fullscreen').onclick = function() {
+    this.style.opacity = 0;
+    this.style.pointerEvents = 'none';
     launchFullScreen(document.body);
 };
 document.getElementById('btn-fullscreen').onclick = function() {
