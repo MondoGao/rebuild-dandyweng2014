@@ -1,6 +1,7 @@
 var tempTimer, pageTimer;
 var maptip = document.getElementById('map-hover');
 var lbData = [];
+var mapdata;
 window.onload = function() {
     changeActive();
     addAngle();
@@ -28,6 +29,7 @@ window.onload = function() {
         document.getElementById('map').querySelectorAll('g')[1].style.opacity = 0;
         document.getElementById('map').querySelectorAll('g')[1].style.pointerEvents = 'none';
         this.style.opacity = 0;
+        this.style.pointerEvents = 'none';
     };
     document.getElementById('lectures-inner').onwheel = function (e) {
         e.stopPropagation();
@@ -42,8 +44,24 @@ window.onload = function() {
     controller[1].onclick = function() {
         articleScroll(-300, document.getElementById('lectures-inner'));
     };
+    getMapdata();
     bindMapEvent();
 };
+
+function getMapdata() {
+    try {
+    var xml = new XMLHttpRequest();
+    xml.onreadystatechange = function() {
+        if (xml.status==200) {
+            mapdata = eval(xml.responseText);
+            console.log(mapdata);
+        }
+    };
+    xml.open('GET', 'http://www.magcin.cn/weng/mapData.json', true);
+    xml.setRequestHeader('Access-Control-Allow-Origin','*');
+    xml.send();
+} catch (e) {return 0;}
+}
 
 function articleScroll(deltaX, _this) {
     var controller = document.getElementById('lectures').querySelectorAll('.controller');
@@ -83,13 +101,13 @@ function changeImg (dest, lbImg, lb, lbLoader) {
         var maxh = document.body.clientHeight - 150;
         // console.log(wDh);
         if(wDh > maxw/maxh) {
-            var finW = Math.max(imgw, maxw);
+            var finW = Math.min(imgw, maxw);
             lb.querySelector('.out-container').style.width = finW + 'px';
             lbImg.style.width = finW - 8 + 'px';
             lb.querySelector('.out-container').style.height = finW/wDh + 'px';
             lbImg.style.height = finW/wDh - 8 + 'px';
         } else {
-            var finH = Math.max(imgh, maxh);
+            var finH = Math.min(imgh, maxh);
             lb.querySelector('.out-container').style.height = finH + 'px';
             lbImg.style.height = finH - 8 + 'px';
             lb.querySelector('.out-container').style.width =  finH * wDh + 'px';
@@ -114,13 +132,13 @@ function resetImage(_a, lbOverlay, lb, lbImg,lbLoader) {
         var maxw = document.body.clientWidth - 40;
         var maxh = document.body.clientHeight - 150;
         if(wDh > maxw/maxh) {
-            var finW = Math.max(imgw, maxw);
+            var finW = Math.min(imgw, maxw);
             lb.querySelector('.out-container').style.width = finW + 'px';
             lb.querySelector('.out-container').style.height = finW/wDh + 'px';
             lbImg.style.width = finW - 8 + 'px';
             lbImg.style.height = finW/wDh - 8 + 'px';
         } else {
-            var finH = Math.max(imgh, maxh);
+            var finH = Math.min(imgh, maxh);
             lb.querySelector('.out-container').style.height = finH + 'px';
             lbImg.style.height = finH - 8 + 'px';
             lb.querySelector('.out-container').style.width =  finH * wDh + 'px';
@@ -305,21 +323,24 @@ function changeMaptipPos(e, data) {
     maptip.innerHTML = e.srcElement.getAttribute(data);
     maptip.style.top = e.clientY + 'px';
     maptip.style.left = e.clientX + 'px';
+    if(data == 'data-index' && mapdata) {
+        maptip.innerHTML = mapdata.items[maptip.innerHTML].name;
+    }
     // console.log(e);
 }
 
 function addAngle() {
     var sections = document.querySelectorAll('section');
     var angleTemplate = document.querySelector('#section-angle');
-    if(!sections.forEach) {
-        for(var sec of sections) {
-            var clone = document.importNode(angleTemplate.content, true);
-            if(sec.id != 'contact')
-                sec.appendChild(clone);
-            // Todo: 适配火狐
-            // clone.href = '#' + sec.id;
-        }
-    } else {
+    // if(!sections.forEach) {
+    //     for(var sec of sections) {
+    //         var clone = document.importNode(angleTemplate.content, true);
+    //         if(sec.id != 'contact')
+    //             sec.appendChild(clone);
+    //         // Todo: 适配火狐
+    //         // clone.href = '#' + sec.id;
+    //     }
+    // } else {
         sections.forEach(function(element, index, array) {
             var clone = document.importNode(angleTemplate.content, true);
             if(index != 6)
@@ -334,15 +355,15 @@ function addAngle() {
                     scrollPosition(sections[index + 1].id);
                 };
         });
-    }
+    // }
 }
-
+var deltaY= 0;
 document.body.onwheel = function(e) {
     clearInterval(tempTimer);
     clearTimeout(pageTimer);
     changeActive();
 
-    var deltaY = e.deltaY*5;
+    deltaY += e.deltaY*5;
     // ff的delta比其他浏览器小，扩大
     if (getBrowserVersion() == 'firefox') {
         deltaY *= 12;
@@ -353,7 +374,7 @@ document.body.onwheel = function(e) {
             clearInterval(tempTimer);
             clearTimeout(pageTimer);
             //页面滚动超过contact后不再纠正位置
-            if(getScrollOffsets().y < document.getElementById('contact').offsetTop)
+            if(getScrollOffsets().y < document.getElementById('contact').offsetTop && getViewPortSize().y > 800)
                 pageTimer = setTimeout(function() {
                     scrollPosition(document.querySelector('section:not(.inactive)').id);
                 }, 1000);

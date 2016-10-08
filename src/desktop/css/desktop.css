@@ -37,6 +37,14 @@ section {
   section .content {
     position: relative; }
 
+@media (max-height: 800px) {
+  section:not(#contact) {
+    height: auto !important;
+    padding-top: 30vh !important;
+    padding-bottom: 30vh !important; }
+
+  section#lectures {
+    bottom: 50px !important; } }
 ol, ul {
   list-style: none; }
 
