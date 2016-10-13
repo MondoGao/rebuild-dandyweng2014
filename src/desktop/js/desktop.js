@@ -10,6 +10,9 @@ window.onload = function() {
     bindLightboxEvent();
     isFullScreen();
     addAngle();
+
+    
+    // test function
     getMapdata();
     bindMapEvent();
 };

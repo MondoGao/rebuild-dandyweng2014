@@ -161,14 +161,39 @@ a.angle {
         pointer-events: auto;
     }
 }
-// #lightbox-thumb {
-//     position: fixed;
-//     left: 0;
-//     bottom: 0;
-//     right: 0;
-//     height: 100px;
-//     background: blue;
-// }
+#lightbox-thumb {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 130px;
+    text-align: center;
+    .out-container {
+        display: inline-block;
+        margin-left: -2px;
+        margin: 0 auto;
+        height: 100%;
+        font-size: 0;
+        &::before {
+            content: "";
+            display: inline-block;
+            height: 100%;
+        }
+        img {
+            margin-left: 2px;
+            // border: 2px solid rgba(255, 255, 255, .5);
+            height: 100px;
+            border-radius: 3px;
+            opacity: .4;
+            // vertical-align: bottom;
+            transition: height .8s, opacity .8s;
+            &:hover {
+                opacity: .9;
+                height: 120px;
+            }
+        }
+    }
+}
 #lightbox {
     @include positionFixedWindow;
     opacity: 0;

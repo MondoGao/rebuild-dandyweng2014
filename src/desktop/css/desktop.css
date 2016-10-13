@@ -145,6 +145,33 @@ a.angle {
     opacity: .8;
     pointer-events: auto; }
 
+#lightbox-thumb {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 130px;
+  text-align: center; }
+  #lightbox-thumb .out-container {
+    display: inline-block;
+    margin-left: -2px;
+    margin: 0 auto;
+    height: 100%;
+    font-size: 0; }
+    #lightbox-thumb .out-container::before {
+      content: "";
+      display: inline-block;
+      height: 100%; }
+    #lightbox-thumb .out-container img {
+      margin-left: 2px;
+      height: 100px;
+      border-radius: 3px;
+      opacity: .4;
+      transition: height .8s, opacity .8s; }
+      #lightbox-thumb .out-container img:hover {
+        opacity: .9;
+        height: 120px; }
+
 #lightbox {
   position: fixed;
   top: 0;
