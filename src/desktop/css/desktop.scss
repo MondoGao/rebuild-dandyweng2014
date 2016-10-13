@@ -142,12 +142,16 @@ a.angle {
     }
 }
 
-#lightbox-overlay {
+@mixin positionFixedWindow {
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
+}
+
+#lightbox-overlay {
+    @include positionFixedWindow;
     background: #000;
     opacity: 0;
     transition: opacity 1s;
@@ -157,12 +161,16 @@ a.angle {
         pointer-events: auto;
     }
 }
+// #lightbox-thumb {
+//     position: fixed;
+//     left: 0;
+//     bottom: 0;
+//     right: 0;
+//     height: 100px;
+//     background: blue;
+// }
 #lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    @include positionFixedWindow;
     opacity: 0;
     padding: 50px 20px 100px;
     transition: opacity 1s;

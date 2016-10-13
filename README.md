@@ -4,9 +4,19 @@
 纪录实习期的学习和该项目更新纪录
 
 ### Unreleased
+#### Added
+- lightbox缩略图W
+
 #### Prepare
 - body高度和滚动问题
 - 函数闭包
+
+### [1.2.0] - 2016-10-13
+#### Changed
+- 优化判断激活section的方法的性能，并可在一定范围内同时激活两个sec
+- 更改一些方法
+- 优化页面平滑滚动体验
+- 略增加头像效果代码复用度
 
 ### [1.1.2] - 2016-10-08
 #### Added
@@ -152,6 +162,7 @@
 [1.1.0]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.1.0
 [1.1.1]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.1.1
 [1.1.2]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.1.2
+[1.2.0]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.2.0
 
 [Shadow DOM]: http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
 [Template]: http://www.html5rocks.com/en/tutorials/webcomponents/template/

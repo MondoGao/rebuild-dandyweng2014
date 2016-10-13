@@ -1,53 +1,15 @@
 var tempTimer, pageTimer;
 var maptip = document.getElementById('map-hover');
 var lbData = [];
+var deltaY= 0;
 var mapdata;
 window.onload = function() {
+    bindOtherEvent();
     changeActive();
-    addAngle();
     bindPortaitEvent();
     bindLightboxEvent();
     isFullScreen();
-    window.onresize = function () {
-        isFullScreen();
-    };
-    document.querySelector('article.video-available').onclick = function() {
-        var p = document.getElementById('player').getElementsByTagName('p')[0];
-        var iframe = document.createElement('iframe');
-        iframe.src = 'http://player.youku.com/embed/' + document.querySelector('[data-youku]').dataset.youku;
-        iframe.setAttribute('frameborder', '0');
-        iframe.setAttribute('quality', 'high');
-        iframe.setAttribute('style','width:100%;height:100%;opacity:0;transition:opacity 1s;');
-        iframe.onload = function() {
-            console.log('video is ready');
-            setTimeout(function() {
-                p.style.opacity = 0;
-                p.style.pointerEvents = 'none';
-                iframe.style.opacity = 1;
-            },700);
-        };
-        document.getElementById('player').insertBefore(iframe, p);
-        document.getElementById('player').className = "";
-    };
-    document.getElementById('trypophobia').onclick = function() {
-        document.getElementById('map').querySelectorAll('g')[1].style.opacity = 0;
-        document.getElementById('map').querySelectorAll('g')[1].style.pointerEvents = 'none';
-        this.style.opacity = 0;
-        this.style.pointerEvents = 'none';
-    };
-    document.getElementById('lectures-inner').onwheel = function (e) {
-        e.stopPropagation();
-        // var controller = document.getElementById('lectures').querySelectorAll('.controller');
-        articleScroll(-e.deltaY*5, this);
-
-    };
-    var controller = document.getElementById('lectures').querySelectorAll('.controller');
-    controller[0].onclick = function() {
-        articleScroll(300, document.getElementById('lectures-inner'));
-    };
-    controller[1].onclick = function() {
-        articleScroll(-300, document.getElementById('lectures-inner'));
-    };
+    addAngle();
     getMapdata();
     bindMapEvent();
 };
@@ -137,7 +99,6 @@ function changeImg (dest, lbImg, lb, lbLoader) {
 
 function resetImage(_a, lbOverlay, lb, lbImg,lbLoader) {
     lbOverlay.className = lb.className = "show";
-    // _a = this;
     var img = new Image();
     img.onload = function() {
         var imgw = img.width;
@@ -216,46 +177,41 @@ function bindPortaitEvent() {
     var offIn = portait.querySelector('.offset-inner');
     var front = offIn.querySelector('.sticker-front');
     var back = offIn.querySelector('.sticker-back');
+
+    function portaitAnimate(hW,relaLeft,relaTop) {
+        offOut.style[hW] = 50 + (hW == 'width'?relaLeft:relaTop)/2 + 'px';
+        back.classList.remove('up','right','left','down');
+        back.classList.add(enterDirection);
+        back.style.transform = 'translate'+ (hW == 'width'?'X':'Y') +'(-' + (100 - (hW == 'width'?relaLeft:relaTop)) + 'px) scale'+ (hW == 'width'?'X':'Y') +'(-1)';
+        back.querySelector('.sticker-shadow').style[hW = 'width' ? 'height' : 'width'] = "100%";
+        back.querySelector('.sticker-shadow').style[hW] = 55 - (hW == 'width'?relaLeft:relaTop)/2 + 'px';
+    }
+    function portaitAnimate2(hW,relaLeft,relaTop) {
+        offOut.style[hW] = (100 - (hW == 'width'?relaLeft:relaTop)/2) + 'px';
+        offOut.style.transform = 'translate'+ (hW == 'width'?'X':'Y') +'(' + (hW == 'width'?relaLeft:relaTop)/2 + 'px)';
+        offIn.style.transform = 'translate'+ (hW == 'width'?'X':'Y') +'(-' + (hW == 'width'?relaLeft:relaTop)/2 + 'px)';
+        back.classList.remove('up','right','left','down');
+        back.classList.add(enterDirection);
+        back.style.transform = 'translate'+ (hW == 'width'?'X':'Y') +'(' + (hW == 'width'?relaLeft:relaTop) + 'px) scale'+ (hW == 'width'?'X':'Y') +'(-1)';
+        back.querySelector('.sticker-shadow').style[hW = 'width' ? 'height' : 'width'] = '100%';
+        back.querySelector('.sticker-shadow').style[hW] = (hW == 'width'?relaLeft:relaTop)/2 + 5 + 'px';
+    }
+
     portait.onmousemove = function(e) {
         var relaTop = e.clientY - this.getBoundingClientRect().top;
         var relaLeft = e.clientX - this.getBoundingClientRect().left;
         switch (enterDirection) {
             case 'right':
-                offOut.style.width = 50 + relaLeft/2 + 'px';
-                back.classList.remove('up','right','left','down');
-                back.classList.add('right');
-                back.style.transform = 'translateX(-' + (100 - relaLeft) + 'px) scaleX(-1)';
-                back.querySelector('.sticker-shadow').style.height = "100%";
-                back.querySelector('.sticker-shadow').style.width = 55 - relaLeft/2 + 'px';
-                // back.querySelector('.sticker-shadow').style.right = 30 - relaLeft/2 + 'px';
+                portaitAnimate('width', relaLeft, relaTop);
                 break;
             case 'down':
-                offOut.style.height = 50 + relaTop/2 + 'px';
-                back.classList.remove('up','right','left','down');
-                back.classList.add('down');
-                back.style.transform = 'translateY(-' + (100 - relaTop) + 'px) scaleY(-1)';
-                back.querySelector('.sticker-shadow').style.width = '100%';
-                back.querySelector('.sticker-shadow').style.height = 55 - relaTop/2 + 'px';
+                portaitAnimate('height', relaLeft, relaTop);
                 break;
             case 'left':
-                offOut.style.width = (100 - relaLeft/2) + 'px';
-                offOut.style.transform = 'translateX(' + relaLeft/2 + 'px)';
-                offIn.style.transform = 'translateX(-' + relaLeft/2 + 'px)';
-                back.classList.remove('up','right','left','down');
-                back.classList.add('left');
-                back.style.transform = 'translateX(' + relaLeft + 'px) scaleX(-1)';
-                back.querySelector('.sticker-shadow').style.height = '100%';
-                back.querySelector('.sticker-shadow').style.width = relaLeft/2 + 5 + 'px';
+                portaitAnimate2('width', relaLeft, relaTop);
                 break;
             case 'up':
-                offOut.style.height = (100 - relaTop/2) + 'px';
-                offOut.style.transform = 'translateY(' + relaTop/2 + 'px)';
-                offIn.style.transform = 'translateY(-' + relaTop/2 + 'px)';
-                back.classList.remove('up','right','left','down');
-                back.classList.add('up');
-                back.style.transform = 'translateY(' + relaTop + 'px) scaleY(-1)';
-                back.querySelector('.sticker-shadow').style.width = '100%';
-                back.querySelector('.sticker-shadow').style.height = 5 + relaTop/2 + 'px';
+                portaitAnimate2('height', relaLeft, relaTop);
                 break;
             default:
             console.log("default");
@@ -274,8 +230,8 @@ function bindPortaitEvent() {
         back.style.transition = 'transform .4s linear';
         // portaitState = false;
         offOut.style.height = offOut.style.width = '100px';
-        offOut.style.transform = 'translateX(0) translateY(0)';
-        offIn.style.transform = 'translateX(0) translateY(0)';
+        offOut.style.transform = offIn.style.transform = 'translateX(0) translateY(0)';
+        //  'translateX(0) translateY(0)';
         switch(enterDirection) {
             case 'right':
             case 'left':
@@ -347,66 +303,39 @@ function addAngle() {
     var sections = document.querySelectorAll('section');
     var angleTemplate = document.querySelector('#section-angle');
     // if(!sections.forEach) {
-    //     for(var sec of sections) {
-    //         var clone = document.importNode(angleTemplate.content, true);
-    //         if(sec.id != 'contact')
-    //             sec.appendChild(clone);
-    //         // Todo: 适配火狐
-    //         // clone.href = '#' + sec.id;
-    //     }
+        // for(var sec of sections) {
+        //     var clone = document.importNode(angleTemplate.content, true);
+        //     if(sec.id != 'contact')
+        //         sec.appendChild(clone);
+        //     // Todo: 适配火狐
+        //     // clone.href = '#' + sec.id;
+        // }
     // } else {
-        sections.forEach(function(element, index, array) {
+    angle = angleTemplate.content.querySelector('.angle');
+    sections.forEach(function(element, index, array) {
+        if(index < 6) {
+            angle.dataset.next = '#' + sections[index + 1].id;
+            // debugger;
+            // importNode及cloneNode都不会复制节点用js动态绑定的事件。
             var clone = document.importNode(angleTemplate.content, true);
-            if(index != 6)
-                element.appendChild(clone);
-        });
+            element.appendChild(clone);
+            var allAngle = document.querySelectorAll('.angle');
+            allAngle[allAngle.length - 1].addEventListener("click", scrollPosition);
+        }
+    });
         // 无法在上面添加href
-        document.querySelectorAll('.angle').forEach(function(element, index, array) {
-            if(index != 6)
-                element.href = '#' + sections[index + 1].id;
-                element.onclick = function(e) {
-                    e.preventDefault();
-                    scrollPosition(sections[index + 1].id);
-                };
-        });
+
+        // document.querySelectorAll('.angle').forEach(function(element, index, array) {
+        //     if(index != 6)
+        //         element.href = '#' + sections[index + 1].id;
+        //         element.onclick = function(e) {
+        //             e.preventDefault();
+        //             scrollPosition(sections[index + 1].id);
+        //         };
+        // });
     // }
 }
-var deltaY= 0;
-document.body.onwheel = function(e) {
-    clearInterval(tempTimer);
-    clearTimeout(pageTimer);
-    changeActive();
 
-    deltaY += e.deltaY*5;
-    // ff的delta比其他浏览器小，扩大
-    if (getBrowserVersion() == 'firefox') {
-        deltaY *= 12;
-    }
-    tempTimer = setInterval(function () {
-        var tempDeltaY =  deltaY / 10;
-        if (Math.abs(tempDeltaY) < 0.5) {
-            clearInterval(tempTimer);
-            clearTimeout(pageTimer);
-            //页面滚动超过contact后不再纠正位置
-            if(getScrollOffsets().y < document.getElementById('contact').offsetTop && getViewPortSize().y > 800)
-                pageTimer = setTimeout(function() {
-                    scrollPosition(document.querySelector('section:not(.inactive)').id);
-                }, 1000);
-        }
-        window.scrollBy(0, tempDeltaY);
-        deltaY -= tempDeltaY;
-        changeActive();
-    }, 15);
-};
-
-document.querySelector('#enter-fullscreen').onclick = function() {
-    this.style.opacity = 0;
-    this.style.pointerEvents = 'none';
-    launchFullScreen(document.body);
-};
-document.getElementById('btn-fullscreen').onclick = function() {
-    launchFullScreen(document.body);
-};
 
 function launchFullScreen(element) {
   if(element.requestFullscreen) {
@@ -424,20 +353,110 @@ function launchFullScreen(element) {
 
 //onscroll经常不触发，暂时没找到原因，改成函数。
 function changeActive() {
-    var sY = getScrollOffsets().y;
+    // var sY = getScrollOffsets().y;
+    var activeSecs = [];
     var sections = document.querySelectorAll('section');
-    var active = 0;
     for(var i = 0; i < 7; i++) {
-        if(sY > sections[i].offsetTop - getViewPortSize().y/2) {
-            active = i;
-        }
-    }
-    sections[active].classList.remove('inactive');
-    for(var i = 0; i < 7; i++) {
-        if(i != active) {
+        // if(sY > sections[i].offsetTop - getViewPortSize().y/2 - 100) {
+        if(Math.abs(sections[i].getBoundingClientRect().top) < getViewPortSize().y/2 + 100) {
+            sections[i].classList.remove('inactive');
+        } else {
             sections[i].classList.add('inactive');
         }
+        // else if (sY > sections[i].offsetTop - getViewPortSize().y/2 + 100){}
     }
+    // sections[active].classList.remove('inactive');
+    // for(var i = 0; i < 7; i++) {
+    //     if(i != active) {
+    //         sections[i].classList.add('inactive');
+    //     } else {
+    //         sections[i].classList.remove('inactive');
+    //     }
+    // }
+    // for(var sec of activeSecs) {
+    //     sec.classList.remove('inactive');
+    // }
+}
+
+function bindOtherEvent() {
+    document.body.onwheel = function(e) {
+        clearInterval(tempTimer);
+        clearTimeout(pageTimer);
+        changeActive();
+
+        deltaY += e.deltaY*5;
+        // ff的delta比其他浏览器小，扩大
+        if (getBrowserVersion() == 'firefox') {
+            deltaY *= 12;
+        }
+        tempTimer = setInterval(function () {
+            var tempDeltaY =  deltaY / 10;
+            if (Math.abs(tempDeltaY) < 0.5) {
+                clearInterval(tempTimer);
+                clearTimeout(pageTimer);
+                //页面滚动超过contact后不再纠正位置
+                if(getScrollOffsets().y < document.getElementById('contact').offsetTop && getViewPortSize().y > 800 && document.querySelectorAll('section:not(.inactive)').length < 2)
+                    pageTimer = setTimeout(function() {
+                        this.dataset = {};
+                        this.dataset.next = '#' + document.querySelector('section:not(.inactive)').id;
+                        scrollPosition({preventDefault: function(){}});
+                    }, 1000);
+            } else if(Math.abs(tempDeltaY) > 400) {
+                tempDeltaY = 400;
+            }
+            window.scrollBy(0, tempDeltaY);
+            deltaY -= tempDeltaY;
+            changeActive();
+        }, 15);
+    };
+    window.onresize = function () {
+        isFullScreen();
+    };
+    document.querySelector('article.video-available').onclick = function() {
+        var p = document.getElementById('player').getElementsByTagName('p')[0];
+        var iframe = document.createElement('iframe');
+        iframe.src = 'http://player.youku.com/embed/' + document.querySelector('[data-youku]').dataset.youku;
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('quality', 'high');
+        iframe.setAttribute('style','width:100%;height:100%;opacity:0;transition:opacity 1s;');
+        iframe.onload = function() {
+            console.log('video is ready');
+            setTimeout(function() {
+                p.style.opacity = 0;
+                p.style.pointerEvents = 'none';
+                iframe.style.opacity = 1;
+            },700);
+        };
+        document.getElementById('player').insertBefore(iframe, p);
+        document.getElementById('player').className = "";
+    };
+    document.getElementById('trypophobia').onclick = function() {
+        document.getElementById('map').querySelectorAll('g')[1].style.opacity = 0;
+        document.getElementById('map').querySelectorAll('g')[1].style.pointerEvents = 'none';
+        this.style.opacity = 0;
+        this.style.pointerEvents = 'none';
+    };
+    document.getElementById('lectures-inner').onwheel = function (e) {
+        e.stopPropagation();
+        // var controller = document.getElementById('lectures').querySelectorAll('.controller');
+        articleScroll(-e.deltaY*5, this);
+
+    };
+    var controller = document.getElementById('lectures').querySelectorAll('.controller');
+    controller[0].onclick = function() {
+        articleScroll(300, document.getElementById('lectures-inner'));
+    };
+    controller[1].onclick = function() {
+        articleScroll(-300, document.getElementById('lectures-inner'));
+    };
+    document.querySelector('#enter-fullscreen').onclick = function() {
+        this.style.opacity = 0;
+        this.style.pointerEvents = 'none';
+        launchFullScreen(document.body);
+    };
+    document.getElementById('btn-fullscreen').onclick = function() {
+        launchFullScreen(document.body);
+    };
 }
 
 function getBrowserVersion () {
@@ -499,18 +518,20 @@ function getViewPortSize(_w) {//获取页面的窗口大小
     };
 }
 
-function scrollPosition(_obj) {//参数_obj可以是任何页面上存在的元素的id，或者是指定元素本身
-    var targetY;
-    if (!_obj) { //如果不指定锚点元素，就跳到页面顶端0，0位置
-        targetY = 0;
-    } else {
-        if (typeof (_obj) == "string") {
-            _obj = document.getElementById(_obj);
-        } else {
-            _obj = _obj;
-        }
-        targetY = _obj.getBoundingClientRect().top + getScrollOffsets().y;
-    }
+function scrollPosition(e) {//参数_obj可以是任何页面上存在的元素的id，或者是指定元素本身
+
+    e.preventDefault();
+    var targetY = document.querySelector(this.dataset.next).getBoundingClientRect().top + getScrollOffsets().y;
+    // if (!_obj) { //如果不指定锚点元素，就跳到页面顶端0，0位置
+    //     targetY = 0;
+    // } else {
+    //     if (typeof (_obj) == "string") {
+    //         _obj = document.getElementById(_obj);
+    //     } else {
+    //         _obj = _obj;
+    //     }
+    //     targetY = _obj.getBoundingClientRect().top + getScrollOffsets().y;
+    // }
 
     //如果目标元素的位置在最后一屏，那就指定目标位置为页面底部
     //如果目标元素的位置为负数，就指定目标位置为页面顶部
