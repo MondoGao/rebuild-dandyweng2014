@@ -4,11 +4,14 @@
 纪录实习期的学习和该项目更新纪录
 
 ### Unreleased
-#### Added
-- lightbox缩略图W
-
 #### Prepare
 - body高度和滚动问题
+
+### [1.2.1] - 2016-10-14
+#### Added
+- lightbox缩略图
+
+#### Ready
 - 函数闭包
 
 ### [1.2.0] - 2016-10-13
@@ -163,6 +166,7 @@
 [1.1.1]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.1.1
 [1.1.2]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.1.2
 [1.2.0]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.2.0
+[1.2.1]: https://github.com/bestgaohua/rebuild-dandyweng2014/releases/tag/v1.2.1
 
 [Shadow DOM]: http://www.html5rocks.com/zh/tutorials/webcomponents/shadowdom/
 [Template]: http://www.html5rocks.com/en/tutorials/webcomponents/template/

@@ -1,6 +1,7 @@
 var tempTimer, pageTimer;
 var maptip = document.getElementById('map-hover');
 var lbData = [];
+var lbThumbData= [];
 var deltaY= 0;
 var mapdata;
 window.onload = function() {
@@ -11,7 +12,7 @@ window.onload = function() {
     isFullScreen();
     addAngle();
 
-    
+
     // test function
     getMapdata();
     bindMapEvent();
@@ -100,8 +101,8 @@ function changeImg (dest, lbImg, lb, lbLoader) {
     img.src = 'src/desktop/img/lightbox/' + lbData[Number(lbImg.dataset.index) + dest];
 }
 
-function resetImage(_a, lbOverlay, lb, lbImg,lbLoader) {
-    lbOverlay.className = lb.className = "show";
+function resetImage(_a, lbOverlay, lb, lbImg,lbLoader,lbThumb) {
+    lbOverlay.className = lb.className =  lbThumb.className = "show";
     var img = new Image();
     img.onload = function() {
         var imgw = img.width;
@@ -135,26 +136,80 @@ var lbtimer;
 function bindLightboxEvent() {
     var lbOverlay = document.getElementById('lightbox-overlay');
     var lb = document.getElementById('lightbox');
+    var lbThumbIn = document.getElementById('lightbox-thumb').querySelector('.in-container');
+    var lbThumb = document.getElementById('lightbox-thumb');
     var lbImg = lb.querySelector('img');
     var lbLoader = lb.querySelector('.loader');
     var lbNav = lb.querySelector('.nav');
     var montage = document.getElementById('montage');
+    var as = montage.querySelectorAll('a');
     var index = 0;
+
+    function changeThumb(_this, dest) {
+        // debugger;
+        if(dest !== undefined) {
+            if(Number(lbImg.dataset.index) + dest < 0) {
+                dest = 13;
+            } else if (Number(lbImg.dataset.index) + dest > lbData.length - 1) {
+                dest = -13;
+            }
+            _this = _this[Number(lbImg.dataset.index) + dest];
+        }
+        // console.log(_this);
+        var imgIndex = _this.querySelector('img').dataset.index;
+        var inContainWidth = lbThumbIn.scrollWidth;
+        var imgs = lbThumbIn.querySelectorAll('img');
+        // debugger;
+        var inTransX = inContainWidth/2 - imgs[0].scrollWidth/2;
+
+        for(var i = 0;  i < imgs.length; i++) {
+            if(i < imgIndex){
+                inTransX -= imgs[i].scrollWidth;
+                imgs[i].className = "";
+            } else if (i > imgIndex) {
+                imgs[i].className = "";
+            }
+        }
+
+        lbThumbIn.style.transform = "translateX(" + inTransX + "px)";
+        imgs[imgIndex].className = "active";
+    }
+
     for(var a of montage.getElementsByTagName('a')) {
         lbData.push(a.querySelector('img').dataset.highres);
         a.querySelector('img').dataset.index = index;
+        var clone = a.querySelector('img').cloneNode(false);
+        clone.dataset.index = index;
+        lbThumbIn.appendChild(clone);
+        console.log(clone)
+        clone.addEventListener('click',function(){
+            clearTimeout(lbtimer);
+            _this = this;
+            lbLoader.classList.remove('complete');
+            lbImg.className = "";
+            lbtimer = setTimeout(function() {
+                changeImg(_this.dataset.index - lbThumbIn.querySelector('.active').dataset.index, lbImg, lb, lbLoader);
+                // debugger;
+                changeThumb(as, _this.dataset.index - lbThumbIn.querySelector('.active').dataset.index);
+            }, 700);
+        },false);
+        // debugger;
         a.onclick = function(e) {
             e.preventDefault();
-            resetImage(this, lbOverlay, lb, lbImg, lbLoader);
+            changeThumb(this);
+            resetImage(this, lbOverlay, lb, lbImg, lbLoader, lbThumb);
         }
         index++;
     }
+
     lbNav.querySelector('.prev').onclick = function() {
         clearTimeout(lbtimer);
         lbLoader.classList.remove('complete');
         lbImg.className = "";
         lbtimer = setTimeout(function() {
             changeImg(-1, lbImg, lb, lbLoader);
+            // debugger;
+            changeThumb(as, -1);
         }, 700);
     };
     lbNav.querySelector('.next').onclick = function() {
@@ -163,10 +218,11 @@ function bindLightboxEvent() {
         lbImg.className = "";
         lbtimer = setTimeout(function() {
             changeImg(1, lbImg, lb, lbLoader);
+            changeThumb(as, 1);
         }, 700);
     };
     lbOverlay.onclick = function() {
-        lbOverlay.className = lb.className = "";
+        lbOverlay.className = lb.className = lbThumb.className = "";
         lbLoader.classList.remove('complete');
         lbImg.className = "";
     };

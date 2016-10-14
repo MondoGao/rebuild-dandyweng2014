@@ -5,12 +5,14 @@
     src: url("http://v5.res.dandyweng.com/fonts/merriweather-light-webfont.woff2");
 }
 
-html, body, section, div, ul, li, h1, h2, h3, h4, h5, h6, p, figure, figcaption, article, header, hgroup, form, input, textarea, button {
+html, body, section, div, ul, li, h1, h2, h3, h4, h5, h6, p, figure, figcaption, article, header, hgroup, form, input, textarea, button, a, img {
     margin: 0;
     padding: 0;
     border: 0;
     box-sizing: border-box;
+    backface-visibility: hidden;
 }
+
 *:before, *:after {
     box-sizing: border-box;
 }
@@ -167,17 +169,37 @@ a.angle {
     bottom: 0;
     right: 0;
     height: 130px;
+    opacity: 0;
+    transition: opacity 1s;
+    pointer-events: none;
     text-align: center;
+    &.show {
+        opacity: .8;
+        pointer-events: auto;
+    }
     .out-container {
+        width: 8000px;
+        height: 100%;
+        transform: translateX(-4000px);
+        margin-left: 50%;
+    }
+    .in-container {
         display: inline-block;
         margin-left: -2px;
         margin: 0 auto;
         height: 100%;
         font-size: 0;
+        // text-align: center;
+        transform: translateX(0);
+        white-space: nowrap;
+        overflow: hidden;
+        transition: transform .5s;
+
         &::before {
             content: "";
             display: inline-block;
             height: 100%;
+            // margin-left: 50%;
         }
         img {
             margin-left: 2px;
@@ -187,7 +209,7 @@ a.angle {
             opacity: .4;
             // vertical-align: bottom;
             transition: height .8s, opacity .8s;
-            &:hover {
+            &:hover, &.active {
                 opacity: .9;
                 height: 120px;
             }
